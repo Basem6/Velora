@@ -63,7 +63,6 @@ function App() {
               }></Route>
               <Route path='login' element={
                 <>
-                  <Navbar/>
                   <LoginPage></LoginPage>
                 </>
               }></Route>

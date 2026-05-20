@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { CartContext } from "../Context/Productscontext";
 import { useState } from "react";
+import { getPriceAfterDiscount } from '../utils/priceUtils';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -28,7 +29,7 @@ export default function CartPage() {
         return i.addtocard==true
         })
         const newtotal = filter.reduce((acc, item) => {
-        return acc + item.price * item.countincart;
+        return acc + (getPriceAfterDiscount(item.price, item.Discount) * item.countincart);
         }, 0);
         settotal(newtotal)
     },[state])
@@ -130,7 +131,7 @@ export default function CartPage() {
                                 </div>
 
                                 <span className="text-2xl font-semibold text-[#111111] whitespace-nowrap">
-                                    ${item.price * item.countincart}
+                                    ${(getPriceAfterDiscount(item.price, item.Discount) * item.countincart).toFixed(2)}
                                 </span>
                                 </div>
 

@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { CartContext } from "../Context/Productscontext";
 import {useToast} from '../Context/Toastcontext'
+import { getPriceAfterDiscount } from '../utils/priceUtils';
 export function CartDetailsproduct({index,product}){
     const {state , dispatch} = useContext(CartContext)
     const { showAlert } = useToast()
@@ -37,6 +38,7 @@ export function CartDetailsproduct({index,product}){
 
                     <img
                         src={product.img}
+                        loading='lazy'
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
                     />
@@ -80,7 +82,7 @@ export function CartDetailsproduct({index,product}){
                     <div className="flex justify-between items-center">
 
                         <span className="text-2xl font-bold text-gray-900">
-                        {product.price}
+                        ${getPriceAfterDiscount(product.price, product.Discount)}
                         </span>
 
                         <button className="w-12 h-12 rounded-full bg-black text-white hover:scale-110 transition flex items-center justify-center z-20" onClick={(e)=>{handleAddtocard(e)}}>

@@ -35,11 +35,10 @@ export default function Navbar() {
                     }>
                     Cart
                     </NavLink>
-                    <NavLink
-                    to={"/About"}
+                    <NavLink to={"/About"}
                     className={({ isActive }) =>
                         isActive
-                        ? "text-gray-900 hover:text-gray-900 transition link active"
+                        ? "text-gray-900 hover:text-gray-900 transition link activeleft"
                         : "text-gray-500 hover:text-gray-900 transition link"
                     }>
                     About

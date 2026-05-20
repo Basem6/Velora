@@ -57,7 +57,7 @@ export default function Hero() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {state.map((product , index)=>{
                     if(product.isfetured){
-                    return  <Link key={index+1} to={`/product/${index+1}`}><Cardproudct img={product.img}  category={product.category} name={product.name} price={product.price}/></Link>
+                    return  <Link key={index+1} to={`/product/${index+1}`}><Cardproudct img={product.img} category={product.category} name={product.name} price={product.price} discount={product.Discount}/></Link>
                     }
                 })}
             </div>

@@ -8,6 +8,7 @@ export default function AboutPage() {
             <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSV4m9WUJ9BXjMTBm6LYCzBCD135BCK6I0nR6rKndV_AaIZM0Jv6fKXnho4Bp0SeP5vj6AzSt35PSzd2AeMmnDxSTGVZK_SIN11aJSm22-DK7pRQGRLdt2xYOltkHHo38xFeX8Z2_GiBXhtkaPJVenwctd7M_bjSyJm3yNTIk0dAIt8dCKsub3x7af7gntyvdW31B4m8SuGBj2XAU-EwYjjeByINIh9vdmKqIgWoOJDscwSkAuMh_5SXGkOcviqez80f4U4B8BUmg"
             alt=""
+            loading='lazy'
             className="absolute inset-0 w-full h-full object-cover z-0"
             />
 
@@ -121,6 +122,7 @@ export default function AboutPage() {
                 <img
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq6IMRnb56eCfe8jcZOr1-BLNvSN9_axBCpQBdFvwuCPckdoSgd1Cb3_bz6xBouWacYqeg1Cssd89-Ea11a7u4TrQwMfCIXkXZ7y3N0oMh2JjXw0DLnuxeablURZiVjy6vwWlgjrSh5DNBTlr3jrfWdIyxnmmMB3VOShcJdUX12B4tBwsbbFh5VdUxvfFICa8FBctaveBNqBKzmhd77XlIzMeXmh7yiC4ZBP5VXr5gHHyDtz0MAh3ZMXkcqOdlWjUyKJ2xvdKqqu8"
                     alt=""
+                    loading='lazy'
                     className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700"
                 />
                 </div>
@@ -158,6 +160,7 @@ export default function AboutPage() {
                 <img
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfEAAxA450YSZqbdRvZrF81fvNcD9ln8CWYz_gt_xjFblVVcwpFvzFvhZ1ug6ye33AyxJNby3l81SjjyYoZz1Oo1KsQnEAZp2VITzv1EDFknVjut_XBZ9-ikqlEXFtEk2ScmMKcQKAsGJTaUrFFVbqj9EmP3Fgpxri3hCoXRYRy9o6XK5sMdkxE0HwwCTzZb1XZcwU1JoqRzadWS6SguZI3jsoB2wZo0zieGyUJ8G70jqi-VHpezD7eX5K0F8AwX4zlOgzzWna1Js"
                     alt=""
+                    loading='lazy'
                     className="w-full h-[500px] object-cover hover:scale-105 transition-transform duration-700"
                 />
                 </div>

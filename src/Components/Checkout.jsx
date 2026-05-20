@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { CartContext } from "../Context/Productscontext";
 import { useState } from "react";
+import { getPriceAfterDiscount } from '../utils/priceUtils';
 export default function Checkout() {
     const {state} = useContext(CartContext)
     const [total , settotal] = useState(0)
@@ -9,7 +10,7 @@ export default function Checkout() {
         return i.addtocard==true
         })
         const newtotal = filter.reduce((acc, item) => {
-        return acc + item.price * item.countincart;
+        return acc + (getPriceAfterDiscount(item.price, item.Discount) * item.countincart);
         }, 0);
         settotal(newtotal)
     },[state])
@@ -207,6 +208,7 @@ export default function Checkout() {
                             <img
                                 src={item.img}
                                 alt={item.title}
+                                loading='lazy'
                                 className="w-full h-full object-cover"
                             />
                             </div>
@@ -221,7 +223,7 @@ export default function Checkout() {
                             </p>
 
                             <p className="font-bold mt-1">
-                                ${item.price}
+                                ${getPriceAfterDiscount(item.price, item.Discount)}
                             </p>
                             </div>
 

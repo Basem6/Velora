@@ -1,3 +1,5 @@
+import { getPriceAfterDiscount } from '../utils/priceUtils';
+
 export function CardLove({product , handleClickOpen , keye , handleAddtocard}){
     return(
         <div
@@ -8,6 +10,7 @@ export function CardLove({product , handleClickOpen , keye , handleAddtocard}){
                 <img
                     src={product.img}
                     alt={product.name}
+                    loading='lazy'
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
 
@@ -32,7 +35,7 @@ export function CardLove({product , handleClickOpen , keye , handleAddtocard}){
                     </h3>
 
                     <span className="font-bold text-blue-600">
-                    {product.price}
+                    ${getPriceAfterDiscount(product.price, product.Discount)}
                     </span>
 
                 </div>

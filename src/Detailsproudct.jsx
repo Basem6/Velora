@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState , useContext} from "react";
+import { getPriceAfterDiscount } from './utils/priceUtils';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
@@ -37,7 +38,7 @@ export default function ProductDetails() {
             payload:{id}
         })
     }
-    const priceAfterOffer=current.price-(current.price * current.Discount)/100
+    const priceAfterOffer = getPriceAfterDiscount(current.price, current.Discount)
     return (
         <main className="max-w-[1400px] mx-auto px-4 md:px-10 py-12 bg-[#f8f8f6] min-h-screen">
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">
