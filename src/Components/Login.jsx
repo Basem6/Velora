@@ -1,6 +1,6 @@
 export default function LoginPage() {
     return (
-        <main className="flex items-center justify-center relative overflow-hidden px-4 " style={{ backgroundColor: '#0D0D0D' }}>
+        <main className="flex items-center justify-center relative overflow-hidden px-4 mt-14 " style={{ backgroundColor: '#0D0D0D' }}>
             <div className="w-full min-h-screen max-h-screen max-w-[480px] my-12">
                 <div className="backdrop-blur-xl rounded-2xl shadow-[0px_10px_40px_rgba(0,0,0,0.5)] border overflow-hidden" style={{ backgroundColor: 'rgba(26,26,26,0.9)', borderColor: 'rgba(200,168,130,0.2)' }}>
                 <div className="flex border-b" style={{ borderColor: 'rgba(200,168,130,0.2)' }}>

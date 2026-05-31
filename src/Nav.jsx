@@ -1,23 +1,25 @@
 import { NavLink } from "react-router-dom";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
-import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import { FilledMarquee } from "./Components/Aboutpage";
 import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import MobileMenu from "./Components/MobileMenu";
+import CustomizedBadges from "./Components/CartIcon";
+import CartDrawer from "./Components/CartDrawer";
 export default function Navbar() {
     const nav = useRef();
     const hamburgerRef = useRef();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
 
     useGSAP(() => {
         gsap.to(nav.current, {
             scrollTrigger: {
                 start: "top top",
                 scrub: 1,
-                end: "10px"
+                end: "10px",
             },
             top: 0,
         });
@@ -45,12 +47,27 @@ export default function Navbar() {
             </div>
             <nav className="fixed min-w-full top-9 z-50 border-b shadow-sm" style={{ backgroundColor: '#0D0D0D', borderColor: 'rgba(200,168,130,0.1)' }} ref={nav}>
                 <div className="flex justify-between items-center w-full py-2 px-4 md:px-8">
+                    {/* Mobile Hamburger Button */}
+                    <button
+                        onClick={toggleMobileMenu}
+                        className="block md:hidden p-2 text-gray-300 hover:text-[#C8A882] transition"
+                        aria-label="Toggle menu"
+                    >
+                        <span
+                            ref={hamburgerRef}
+                            className="fa-solid fa-bars text-xl"
+                            style={{
+                                display: "inline-block",
+                                transformOrigin: "center",
+                            }}
+                        />
+                    </button>
                     {/* Logo */}
-                    <div className="text-xl font-bold tracking-tight min-w-1/3" style={{ color: '#C8A882', fontFamily: "'Playfair Display', serif" }}>
+                    <div className="text-xl font-bold tracking-tight md:min-w-1/3 " style={{ color: '#C8A882', fontFamily: "'Playfair Display', serif" }}>
                         LUXE
                     </div>
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex gap-14 items-center min-w-1">
+                    <div className="hidden md:flex gap-14 items-center min-w-1/3 justify-center ">
                         <NavLink to="/" 
                             style={{ fontFamily: "'Playfair Display', serif" }}
                             className={({ isActive }) =>
@@ -83,47 +100,39 @@ export default function Navbar() {
                     <div className="hidden md:flex gap-2 items-center min-w-1/3 justify-end">
                         <NavLink to="/Wishlist">
                             {({ isActive }) => (
-                                <button className="p-2 rounded-full transition mx-1" style={{ color: isActive ? '#C8A882' : 'rgba(240,236,228,0.6)' }}>
+                                <button className="p-2 rounded-full transition mx-1 cursor-pointer" style={{ color: isActive ? '#C8A882' : 'white' }}>
                                     <FavoriteBorderIcon />
                                 </button>
                             )}
                         </NavLink>
                         <NavLink to="/Cart" >
                             {({ isActive }) => (
-                                <button className="p-2 rounded-full transition mx-1" style={{ color: isActive ? '#C8A882' : 'rgba(240,236,228,0.6)' }}>
-                                    <LocalMallOutlinedIcon />
+                                <button  style={{ color: isActive ? '#C8A882' : 'white' }} style={{ color: isActive ? '#C8A882' : 'white' }}>
+                                    <CustomizedBadges style={{ color: isActive ? '#C8A882' : 'white' }}></CustomizedBadges>
                                 </button>
+                                
                             )}
                         </NavLink>
                         <NavLink to="/login" >
                             {({ isActive }) => (
-                                <button className="p-2 rounded-full transition mx-1" style={{ color: isActive ? '#C8A882' : 'rgba(240,236,228,0.6)' }}>
-                                    <Person2OutlinedIcon />
+                                <button className="p-2 rounded-full transition mx-1 cursor-pointer" style={{ color: isActive ? '#C8A882' : 'white' }}>
+                                    <Person2OutlinedIcon  />
                                 </button>
                             )}
                         </NavLink>
                     </div>
-
-                    {/* Mobile Hamburger Button */}
-                    <button
-                        onClick={toggleMobileMenu}
-                        className="block md:hidden p-2 text-gray-300 hover:text-[#C8A882] transition"
-                        aria-label="Toggle menu"
-                    >
-                        <span
-                            ref={hamburgerRef}
-                            className="fa-solid fa-bars text-xl"
-                            style={{
-                                display: "inline-block",
-                                transformOrigin: "center",
-                            }}
+                    <div className="block md:hidden">
+                        <CustomizedBadges 
+                            style={'white'} 
+                            onClick={() => setCartDrawerOpen(true)}
                         />
-                    </button>
+                    </div>
                 </div>
             </nav>
-
             {/* Mobile Menu */}
             <MobileMenu isOpen={mobileMenuOpen} onClose={closeMobileMenu} />
+            {/* Cart Drawer */}
+            <CartDrawer open={cartDrawerOpen} onClose={() => setCartDrawerOpen(false)} />
         </>
     );
 }

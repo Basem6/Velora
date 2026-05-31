@@ -9,7 +9,6 @@ import { useGSAP } from "@gsap/react";
 export default function MobileMenu({ isOpen, onClose }) {
     const menuRef = useRef(null);
     const backdropRef = useRef(null);
-
     useGSAP(() => {
         if (isOpen) {
             // Animate menu sliding in from left

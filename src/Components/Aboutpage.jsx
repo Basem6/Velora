@@ -277,30 +277,30 @@
 
     export default function AboutSection() {
     return (
-        <>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-        <div style={{ fontFamily: "'DM Sans', sans-serif", background: "#0D0D0D", color: "#F0ECE4", minHeight: "100vh" } }>
-            <div> <HeroBlock /></div>
-            {/* Marquee strip 1 — outline */}
-            <div  style={{ padding: "2rem 0", borderBottom: "0.5px solid rgba(255,255,255,0.08)", overflow: "hidden" }}>
-            <Marquee text="Handcrafted Footwear · Cairo · Est. 2012 · Walk Further" speed={35}/>
+        <div className="py-14">
+            <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+            <div style={{ fontFamily: "'DM Sans', sans-serif", background: "#0D0D0D", color: "#F0ECE4", minHeight: "100vh" } } >
+                <div> <HeroBlock /></div>
+                {/* Marquee strip 1 — outline */}
+                <div  style={{ padding: "2rem 0", borderBottom: "0.5px solid rgba(255,255,255,0.08)", overflow: "hidden" }}>
+                <Marquee text="Handcrafted Footwear · Cairo · Est. 2012 · Walk Further" speed={35}/>
+                </div>
+                <ManifestoBlock />
+                <ValuesBlock />
+
+                {/* Filled marquee strip */}
+                <FilledMarquee text="Free shipping on orders over $150 · Handmade in Egypt · 30-day returns · Lifetime resoling" speed={38} />
+
+                <ProcessBlock />
+
+                {/* Marquee strip 2 — reverse outline */}
+                <div style={{ padding: "2rem 0", borderBottom: "0.5px solid rgba(255,255,255,0.08)", overflow: "hidden" }}>
+                <Marquee text="Goodyear Welted · Full Grain · Natural Rubber · Zero Compromise" speed={28} reverse />
+                </div>
+
+                <TeamBlock />
+                <CtaBlock />
             </div>
-            <ManifestoBlock />
-            <ValuesBlock />
-
-            {/* Filled marquee strip */}
-            <FilledMarquee text="Free shipping on orders over $150 · Handmade in Egypt · 30-day returns · Lifetime resoling" speed={38} />
-
-            <ProcessBlock />
-
-            {/* Marquee strip 2 — reverse outline */}
-            <div style={{ padding: "2rem 0", borderBottom: "0.5px solid rgba(255,255,255,0.08)", overflow: "hidden" }}>
-            <Marquee text="Goodyear Welted · Full Grain · Natural Rubber · Zero Compromise" speed={28} reverse />
-            </div>
-
-            <TeamBlock />
-            <CtaBlock />
         </div>
-        </>
     );
     }

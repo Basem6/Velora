@@ -83,7 +83,7 @@ export default function CartPage() {
             <Button onClick={confirmAgree}>Agree</Button>
             </DialogActions>
         </Dialog>
-        <main className="flex-grow max-w-[1400px] mx-auto w-full px-4 md:px-10 py-12 md:py-16 min-h-screen relative mt-7" style={{ backgroundColor: '#0D0D0D' }}>
+        <main className="max-w-[1400px] mx-auto w-full px-4 md:px-10 py-16 min-h-screen relative mt-12" style={{ backgroundColor: '#0D0D0D' }}>
         <div className="flex flex-col gap-12">
             {/* Header */}
             <div className="flex flex-col gap-4">

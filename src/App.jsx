@@ -26,7 +26,7 @@ function App() {
       smootherRef.current =ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
-      smooth: 1.2,
+      smooth: 1.5,
       effects: true,
     });
   })
@@ -39,42 +39,36 @@ function App() {
             <Routes>
                 <Route path="/" element={
                   <>
-                    <Navbar/>
                     <Hero smootherRef={smootherRef}></Hero>
                     <Footer/>
                   </>
                 } />
                 <Route path="Shop" element={
                   <>
-                    <Navbar/>
                     <Productspage></Productspage>
                     <Footer/>
                   </>
                 } />
                 <Route path="Cart" element={
                   <>
-                    <Navbar/>
                     <CartPage></CartPage>
                     <Footer/>
                   </>
                 } />
                 <Route path="/product/:id"  element={
                   <>
-                    <Navbar/>
                     <ProductDetails></ProductDetails>
                     <Footer/>
                   </>
                 } />
                 <Route path='/checkout' element={
                   <>
-                    <Navbar/>
                     <Checkout></Checkout>
                     <Footer/>
                   </>
                 }></Route>
                 <Route path='about' element={
                   <>
-                    <Navbar/>
                     <AboutPage></AboutPage>
                   </>
                 }></Route>
@@ -85,7 +79,6 @@ function App() {
                 }></Route>
                 <Route path='Wishlist' element={
                   <>
-                    <Navbar/>
                     <WishlistPage></WishlistPage>
                     <Footer/>
                   </>
@@ -93,6 +86,7 @@ function App() {
             </Routes>
           </div>
         </div>
+        <Navbar/>
       </ Contextprovider>
     </ToastContext>
     </>

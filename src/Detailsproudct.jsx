@@ -40,7 +40,7 @@ export default function ProductDetails() {
     }
     const priceAfterOffer = getPriceAfterDiscount(current.price, current.Discount)
     return (
-        <main className=" mt-8 max-w-[1400px] mx-auto px-4 md:px-10 py-12 min-h-screen" style={{ backgroundColor: '#0D0D0D' }}>
+        <main className=" mt-16 max-w-[1400px] mx-auto px-4 md:px-10 py-12 min-h-screen "  style={{ backgroundColor: '#0D0D0D' }}>
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">
             <div className="lg:col-span-7 flex flex-col md:flex-row-reverse gap-4">
             {/* Main Image */}
@@ -77,10 +77,10 @@ export default function ProductDetails() {
                         onChange={(event, newValue) => {
                         setValue(newValue);
                         }}
-                        sx={{
-                          color: '#C8A882',
-                          '& .MuiRating-iconFilled': { color: '#C8A882' },
-                        }}
+                            sx={{
+                            color: '#C8A882',
+                            '& .MuiRating-iconFilled': { color: '#C8A882' },
+                            }}
                     />
                 </Box>
             </div>
@@ -125,7 +125,7 @@ export default function ProductDetails() {
             </div>
             {/* Features */}
             <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-4 p-5 rounded-2xl border" style={{ backgroundColor: '#1a1a1a', borderColor: 'rgba(200,168,130,0.2)', color: '#F0ECE4' }}>
+                <div className="flex items-center gap-4 p-4 rounded-2xl border" style={{ backgroundColor: '#1a1a1a', borderColor: 'rgba(200,168,130,0.2)', color: '#F0ECE4' }}>
                 <span className="material-symbols-outlined">
                     local_shipping
                 </span>
@@ -140,8 +140,7 @@ export default function ProductDetails() {
                     </p>
                 </div>
                 </div>
-
-                <div className="flex items-center gap-4 p-5 rounded-2xl border" style={{ backgroundColor: '#1a1a1a', borderColor: 'rgba(200,168,130,0.2)', color: '#F0ECE4' }}>
+                <div className="flex items-center gap-4 p-4 rounded-2xl border" style={{ backgroundColor: '#1a1a1a', borderColor: 'rgba(200,168,130,0.2)', color: '#F0ECE4' }}>
                 <span className="material-symbols-outlined">
                     verified_user
                 </span>

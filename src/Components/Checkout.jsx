@@ -18,15 +18,14 @@ export default function Checkout() {
         return item.addtocard===true
     })
     return (
-        <main className="max-w-[1400px] mx-auto px-4 md:px-8 pt-12 pb-24 min-h-screen" style={{ backgroundColor: '#0D0D0D', color: '#F0ECE4' }}>
+        <main className="max-w-[1400px] mx-auto px-4 md:px-8 pt-16 pb-24 min-h-screen mt-12" style={{ backgroundColor: '#0D0D0D', color: '#F0ECE4' }}>
+        <h1 className="text-4xl font-bold mb-8" style={{ fontFamily: "'Playfair Display', serif", color: '#F0ECE4' }}>Checkout</h1>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left Side */}
             <div className="lg:col-span-8 space-y-10">
             
             {/* Shipping */}
             <section>
-                <h1 className="text-4xl font-bold mb-8" style={{ fontFamily: "'Playfair Display', serif", color: '#F0ECE4' }}>Checkout</h1>
-
                 <div className="rounded-2xl p-8 shadow-sm" style={{ backgroundColor: '#1a1a1a', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid' }}>
                 <div className="flex items-center gap-4 mb-8">
                     <span className="w-8 h-8 rounded-full text-white flex items-center justify-center text-sm font-bold" style={{ backgroundColor: '#C8A882', color: '#0D0D0D' }}>
@@ -200,86 +199,85 @@ export default function Checkout() {
             </section>
             </div>
             {/* Right Side */}
-            <aside className="lg:col-span-4 sticky top-24">
-            
-            <div className="rounded-2xl p-8 shadow-sm" style={{ backgroundColor: '#1a1a1a', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid' }}>
-                
-                <h3 className="text-2xl font-semibold mb-6" style={{ color: '#F0ECE4' }}>
-                Order Summary
-                </h3>
+            <aside className="lg:col-span-4 ">
+                <div className="rounded-2xl p-8 shadow-sm" style={{ backgroundColor: '#1a1a1a', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid' }}>
+                    
+                    <h3 className="text-2xl font-semibold mb-6" style={{ color: '#F0ECE4' }}>
+                    Order Summary
+                    </h3>
 
-                <div className="space-y-6 mb-8">
-                    {cartItems.map((item, index) => (
-                        <div key={index} className="flex gap-4">
-                            
-                            <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0" style={{ backgroundColor: '#0D0D0D' }}>
-                            <img
-                                src={item.img}
-                                alt={item.title}
-                                loading='lazy'
-                                className="w-full h-full object-cover"
-                            />
+                    <div className="space-y-6 mb-8">
+                        {cartItems.map((item, index) => (
+                            <div key={index} className="flex gap-4">
+                                
+                                <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0" style={{ backgroundColor: '#0D0D0D' }}>
+                                <img
+                                    src={item.img}
+                                    alt={item.title}
+                                    loading='lazy'
+                                    className="w-full h-full object-cover"
+                                />
+                                </div>
+
+                                <div className="flex-grow">
+                                <p className="font-medium" style={{ color: '#F0ECE4' }}>
+                                    {item.title}
+                                </p>
+
+                                <p className="text-sm mt-1" style={{ color: 'rgba(200,168,130,0.6)' }}>
+                                    Qty: {item.countincart}
+                                </p>
+
+                                <p className="font-bold mt-1" style={{ color: '#F0ECE4' }}>
+                                    ${getPriceAfterDiscount(item.price, item.Discount)}
+                                </p>
+                                </div>
+
                             </div>
+                        ))}
+                    </div>
+                    {/* Price */}
+                    <div className="space-y-4 pt-6" style={{ borderTop: '1px solid rgba(200,168,130,0.2)' }}>
+                    
+                    <div className="flex justify-between">
+                        <span style={{ color: 'rgba(200,168,130,0.6)' }}>
+                        Subtotal
+                        </span>
 
-                            <div className="flex-grow">
-                            <p className="font-medium" style={{ color: '#F0ECE4' }}>
-                                {item.title}
-                            </p>
+                        <span className="font-medium" style={{ color: '#F0ECE4' }}>
+                        {total}
+                        </span>
+                    </div>
 
-                            <p className="text-sm mt-1" style={{ color: 'rgba(200,168,130,0.6)' }}>
-                                Qty: {item.countincart}
-                            </p>
+                    <div className="flex justify-between">
+                        <span style={{ color: 'rgba(200,168,130,0.6)' }}>
+                        Shipping
+                        </span>
 
-                            <p className="font-bold mt-1" style={{ color: '#F0ECE4' }}>
-                                ${getPriceAfterDiscount(item.price, item.Discount)}
-                            </p>
-                            </div>
+                        <span className="font-medium" style={{ color: '#F0ECE4' }}>
+                        Free
+                        </span>
+                    </div>
+                    <div className="flex justify-between pt-4" style={{ borderTop: '1px solid rgba(200,168,130,0.2)' }}>
+                        <span className="text-2xl font-bold" style={{ color: '#F0ECE4' }}>
+                        Total
+                        </span>
 
-                        </div>
-                    ))}
+                        <span className="text-2xl font-bold" style={{ color: '#F0ECE4' }}>
+                        ${total}
+                        </span>
+                    </div>
+                    </div>
+
+                    <button className="w-full mt-8 py-4 rounded-full font-semibold hover:scale-[1.02] transition-all duration-200" style={{ backgroundColor: '#C8A882', color: '#0D0D0D' }}>
+                    Complete Purchase
+                    </button>
+
+                    <p className="text-center text-sm mt-4 px-4" style={{ color: 'rgba(200,168,130,0.6)' }}>
+                    By clicking "Complete Purchase", you agree to our Terms &
+                    Conditions and Privacy Policy.
+                    </p>
                 </div>
-                {/* Price */}
-                <div className="space-y-4 pt-6" style={{ borderTop: '1px solid rgba(200,168,130,0.2)' }}>
-                
-                <div className="flex justify-between">
-                    <span style={{ color: 'rgba(200,168,130,0.6)' }}>
-                    Subtotal
-                    </span>
-
-                    <span className="font-medium" style={{ color: '#F0ECE4' }}>
-                    {total}
-                    </span>
-                </div>
-
-                <div className="flex justify-between">
-                    <span style={{ color: 'rgba(200,168,130,0.6)' }}>
-                    Shipping
-                    </span>
-
-                    <span className="font-medium" style={{ color: '#F0ECE4' }}>
-                    Free
-                    </span>
-                </div>
-                <div className="flex justify-between pt-4" style={{ borderTop: '1px solid rgba(200,168,130,0.2)' }}>
-                    <span className="text-2xl font-bold" style={{ color: '#F0ECE4' }}>
-                    Total
-                    </span>
-
-                    <span className="text-2xl font-bold" style={{ color: '#F0ECE4' }}>
-                    ${total}
-                    </span>
-                </div>
-                </div>
-
-                <button className="w-full mt-8 py-4 rounded-full font-semibold hover:scale-[1.02] transition-all duration-200" style={{ backgroundColor: '#C8A882', color: '#0D0D0D' }}>
-                Complete Purchase
-                </button>
-
-                <p className="text-center text-sm mt-4 px-4" style={{ color: 'rgba(200,168,130,0.6)' }}>
-                By clicking "Complete Purchase", you agree to our Terms &
-                Conditions and Privacy Policy.
-                </p>
-            </div>
             </aside>
         </div>
         </main>
