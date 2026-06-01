@@ -1,7 +1,7 @@
 import { useContext } from "react"
-import { CartContext } from "../Context/Productscontext";
-import {useToast} from '../Context/Toastcontext'
-import { getPriceAfterDiscount } from '../utils/priceUtils';
+import { CartContext } from "../../Context/Productscontext";
+import {useToast} from '../../Context/Toastcontext'
+import { getPriceAfterDiscount } from '../../utils/priceUtils';
 export function CartDetailsproduct({index,product}){
     const {state , dispatch} = useContext(CartContext)
     const { showAlert } = useToast()
@@ -35,7 +35,7 @@ export function CartDetailsproduct({index,product}){
                 >
 
                     {/* IMAGE */}
-                    <div className="relative aspect-[4/5] overflow-hidden" style={{ backgroundColor: '#0D0D0D' }}>
+                    <div className="relative aspect-4/5 overflow-hidden" style={{ backgroundColor: '#0D0D0D' }}>
 
                     <img
                         src={product.img}

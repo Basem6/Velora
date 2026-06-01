@@ -7,11 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "download-images": "node download-images.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/rubik": "^5.2.8",
+    "@fontsource/material-symbols-outlined": "^5.2.45",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@gsap/react": "^2.1.2",
     "@mui/icons-material": "^9.0.1",

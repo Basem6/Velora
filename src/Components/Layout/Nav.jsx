@@ -1,13 +1,13 @@
 import { NavLink } from "react-router-dom";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
-import { FilledMarquee } from "./Components/Aboutpage";
+import { FilledMarquee } from "../Aboutpage";
 import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import MobileMenu from "./Components/MobileMenu";
-import CustomizedBadges from "./Components/CartIcon";
-import CartDrawer from "./Components/CartDrawer";
+import MobileMenu from "../MobileMenu";
+import CustomizedBadges from "../CartIcon";
+import CartDrawer from "../CartDrawer";
 export default function Navbar() {
     const nav = useRef();
     const hamburgerRef = useRef();
@@ -63,8 +63,10 @@ export default function Navbar() {
                         />
                     </button>
                     {/* Logo */}
-                    <div className="text-xl font-bold tracking-tight md:min-w-1/3 " style={{ color: '#C8A882', fontFamily: "'Playfair Display', serif" }}>
-                        LUXE
+                    <div className="flex items-center gap-2 md:min-w-1/3">
+                        <span className="hidden sm:inline text-xl font-bold tracking-tight" style={{ color: '#C8A882', fontFamily: "'Playfair Display', serif" }}>
+                            VELORA
+                        </span>
                     </div>
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex gap-14 items-center min-w-1/3 justify-center ">
@@ -98,26 +100,20 @@ export default function Navbar() {
                     </div>
                     {/* Desktop Icons */}
                     <div className="hidden md:flex gap-2 items-center min-w-1/3 justify-end">
-                        <NavLink to="/Wishlist">
+                        <NavLink to="/Wishlist" className="p-2 rounded-full transition mx-1 cursor-pointer" >
                             {({ isActive }) => (
-                                <button className="p-2 rounded-full transition mx-1 cursor-pointer" style={{ color: isActive ? '#C8A882' : 'white' }}>
-                                    <FavoriteBorderIcon />
-                                </button>
+                                    <FavoriteBorderIcon  style={{ color: isActive ? '#C8A882' : 'white' }}/> 
                             )}
                         </NavLink>
-                        <NavLink to="/Cart" >
+                        <NavLink to="/Cart">
                             {({ isActive }) => (
-                                <button  style={{ color: isActive ? '#C8A882' : 'white' }} style={{ color: isActive ? '#C8A882' : 'white' }}>
-                                    <CustomizedBadges style={{ color: isActive ? '#C8A882' : 'white' }}></CustomizedBadges>
-                                </button>
+                                    <CustomizedBadges   style={{ color: isActive ? '#C8A882' : 'white' }}></CustomizedBadges>
+                            )}
+                        </NavLink>
+                        <NavLink to="/login" className="p-2 rounded-full transition mx-1 cursor-pointer">
+                            {({ isActive }) => (
                                 
-                            )}
-                        </NavLink>
-                        <NavLink to="/login" >
-                            {({ isActive }) => (
-                                <button className="p-2 rounded-full transition mx-1 cursor-pointer" style={{ color: isActive ? '#C8A882' : 'white' }}>
-                                    <Person2OutlinedIcon  />
-                                </button>
+                                    <Person2OutlinedIcon  style={{ color: isActive ? '#C8A882' : 'white' }} />
                             )}
                         </NavLink>
                     </div>

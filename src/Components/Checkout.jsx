@@ -1,24 +1,20 @@
-import { useContext, useEffect } from "react";
+import { useContext, useMemo } from "react";
 import { CartContext } from "../Context/Productscontext";
-import { useState } from "react";
 import { getPriceAfterDiscount } from '../utils/priceUtils';
 export default function Checkout() {
     const {state} = useContext(CartContext)
-    const [total , settotal] = useState(0)
-    useEffect(()=>{
-        let filter=state.filter((i)=>{
-        return i.addtocard==true
-        })
-        const newtotal = filter.reduce((acc, item) => {
+    const total = useMemo(() => {
+    return state
+        .filter((item) => item.addtocard === true)
+        .reduce((acc, item) => {
         return acc + (getPriceAfterDiscount(item.price, item.Discount) * item.countincart);
         }, 0);
-        settotal(newtotal)
-    },[state])
+    }, [state]);
     const cartItems =state.filter((item)=>{
         return item.addtocard===true
     })
     return (
-        <main className="max-w-[1400px] mx-auto px-4 md:px-8 pt-16 pb-24 min-h-screen mt-12" style={{ backgroundColor: '#0D0D0D', color: '#F0ECE4' }}>
+        <main className="max-w-350 mx-auto px-4 md:px-8 pt-16 pb-24 min-h-screen mt-12" style={{ backgroundColor: '#0D0D0D', color: '#F0ECE4' }}>
         <h1 className="text-4xl font-bold mb-8" style={{ fontFamily: "'Playfair Display', serif", color: '#F0ECE4' }}>Checkout</h1>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left Side */}
@@ -219,7 +215,7 @@ export default function Checkout() {
                                 />
                                 </div>
 
-                                <div className="flex-grow">
+                                <div className="grow">
                                 <p className="font-medium" style={{ color: '#F0ECE4' }}>
                                     {item.title}
                                 </p>

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
-import { CartContext } from "../Context/Productscontext";
+import { CartContext } from "../../Context/Productscontext";
 import { useState } from "react";
-import { getPriceAfterDiscount } from '../utils/priceUtils';
+import { getPriceAfterDiscount } from '../../utils/priceUtils';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,7 +9,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Link } from "react-router-dom";
-import { useToast } from "../Context/Toastcontext";
+import { useToast } from "../../Context/Toastcontext";
 export default function CartPage() {
     const { showAlert } = useToast()
     const [current ,setcurrent] =useState(0)

@@ -1,4 +1,10 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/rubik";
+* {
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
 body {
   overflow-x: hidden;
   width: 100%;
@@ -6,17 +12,9 @@ body {
   touch-action: pan-y;
   transition: overflow 0.3s ease;
 }
-
-/* Prevent scrolling when mobile menu is open */
 body.menu-open {
   overflow: hidden;
 }
-
-* {
-  font-family: "Inter";
-  box-sizing: border-box;
-}
-
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -25,7 +23,7 @@ body.menu-open {
   padding: 5px;
   font-size: large;
   transition: 400ms;
-  font-family: "'Playfair Display', serif" !important;
+  font-family: "Rubik", sans-serif;
 }
 .link:nth-child(1)::after,
 .link:nth-child(2)::after {

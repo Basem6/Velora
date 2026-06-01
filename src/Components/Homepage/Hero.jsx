@@ -3,9 +3,9 @@ import { SplitText } from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { useState } from "react";
-import Card from "../Components/Card";
-import { HeroSlider } from "../Components/Fetured";
-import { Marquee } from "../Components/Aboutpage";
+import Card from "../Card";
+import { HeroSlider } from "../Fetured";
+import { Marquee } from "../Aboutpage";
 // GSAP
 import { useRef } from "react";
 import gsap from "gsap";
@@ -18,18 +18,31 @@ export default function Hero({smootherRef}) {
     const [showOverlay, setShowOverlay] = useState(() => {
     return !sessionStorage.getItem("hero-animation-done");
 });
+
 //use REf
-    const container = useRef();
-    const titleheader= useRef();
-    const texthero= useRef();
-    const btnleft= useRef();
+    const container = useRef(null);
+    const titleheader= useRef(null);
+    const texthero= useRef(null);
+    const btnleft= useRef(null);
     const btnright= useRef();
     const loading= useRef(null);
     const container2= useRef(null);
     const left= useRef(null);
     const right= useRef(null);
-    const main= useRef();
+    const main= useRef(null);
+    const main2= useRef(null);
     useGSAP(() => {
+    if (
+    !loading.current    ||
+    !left.current       ||
+    !right.current      ||
+    !container2.current ||
+    !container.current  ||
+    !texthero.current   ||
+    !btnleft.current    ||
+    !btnright.current   ||
+    !titleheader.current
+    ) return;
     let splitText = SplitText.create(texthero.current, {
         type: "lines",
         mask: "lines"
@@ -41,8 +54,8 @@ export default function Hero({smootherRef}) {
     }
 });
     tl.from(loading.current, { width: "0%", duration: 1.5, ease: "power2.out" });
-    tl.to(left.current, { transform: "translateX(-110%)", duration: 1.5, ease: "power2.inOut" });
-    tl.to(right.current, { transform: "translateX(110%)", duration: 1.5, ease: "power2.inOut" }, "<");
+    tl.to(left.current, { x: "-110%", duration: 1.5, ease: "power2.inOut" });
+    tl.to(right.current, { x: "110%", duration: 1.5, ease: "power2.inOut" }, "<");
     tl.to(container2.current, { opacity: 0, scale: 0.93, duration: 0.5, ease: "power2.out" }, "<");
     tl.from(container.current, { opacity: 0, scale: 0.93, y: 20, duration: 0.7, ease: "power2.out" });
     tl.from(texthero.current, { opacity: 0, y: 80, duration: 0.8, ease: "power2.out" });
@@ -50,13 +63,15 @@ export default function Hero({smootherRef}) {
     tl.from(btnleft.current, { opacity: 0, x: -100, duration: 1, ease: "power2.out" });
     tl.from(btnright.current, { opacity: 0, x: 100, duration: 1, ease: "power2.out" }, "<");
     tl.fromTo(titleheader.current, { width: "0px" }, { width: "100%", duration: 0.9, ease: "none" });
-
+    return () => {
+        splitText.revert();
+    };
+}, { scope: main, dependencies: [] });
+    useGSAP(() => {
     const mm = gsap.matchMedia();
     // Desktop only
     mm.add("(min-width: 768px)", () => {
-
         const slides = gsap.utils.toArray(".slide");
-
         gsap.from(".anmation", {
             scrollTrigger: {
                 trigger: "#horizontall",
@@ -67,7 +82,6 @@ export default function Hero({smootherRef}) {
             duration: 0.5,
             scale: 0.4,
         });
-
         gsap.to(slides, {
             xPercent: -100 * (slides.length - 1),
             ease: "none",
@@ -82,25 +96,23 @@ export default function Hero({smootherRef}) {
         });
 
     });
-
     // Mobile
     mm.add("(max-width: 767px)", () => {
-
         // reset any transforms
         gsap.set(".slide", {
             clearProps: "all",
         });
 
-    });
-
     return () => {
         mm.revert();
     };
-}, { scope: main, dependencies: [] });
+    });
+
+    },{ scope: main2, dependencies: [] })
     return (
-        <div ref={main} className="py-14">
-            <main  className="w-full overflow-x-hidden">
-            <section className="relative min-h-[650px] flex items-center justify-center overflow-hidden px-6 w-full max-w-full" style={{ backgroundColor: 'black' }}>
+        <div className="py-14">
+            <main ref={main}   className="w-full overflow-x-hidden">
+            <section className="relative min-h-162.5 flex items-center justify-center overflow-hidden px-6 w-full max-w-full" style={{ backgroundColor: 'black' }}>
                 <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[120px]" style={{ background: 'rgba(200,168,130,0.1)', willChange: 'transform' }}></div>
                 <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-[140px]" style={{ background: 'rgba(200,168,130,0.08)', willChange: 'transform' }}></div>
@@ -155,7 +167,7 @@ export default function Hero({smootherRef}) {
             </div>:""
             }
             </main>
-            <section className="relative min-h-screen bg-black">
+            <section className="relative min-h-screen bg-black" ref={main2}>
                     <div className="min-h-screen" id="deals"><HeroSlider></HeroSlider></div>
                     <div id="horizontall" className="">
                             <div className="anmation relative overflow-hidden bg-transparent min-w-full min-h-screen rounded-t-lg shadow-lg shadow-gray-900/25 flex flex-col md:flex-row">

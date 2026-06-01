@@ -1,12 +1,9 @@
-import Box from '@mui/material/Box';
-import Rating from '@mui/material/Rating';
-import Slider from '@mui/material/Slider';
 import {CartDetailsproduct} from './CardDetailsproduct'
 import { Link } from 'react-router-dom';
 import { useContext ,useState, useMemo} from "react";
-import { CartContext } from "../Context/Productscontext";
-import TemporaryDrawer from '../Components/Drawer';
-import { AsideCategory } from '../Components/AsideCategory';
+import { CartContext } from "../../Context/Productscontext";
+import TemporaryDrawer from '../Drawer';
+import { AsideCategory } from '../AsideCategory';
 export default function Productspage() {
     const {state} = useContext(CartContext)
     const [value, setValue] = useState(null);

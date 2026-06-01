@@ -1,11 +1,11 @@
 import './App.css'
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import Navbar from './Nav'
+import Navbar from './Components/Layout/Nav'
 import { Routes, Route } from "react-router-dom";
-import Footer from './Footer';
-import Productspage from './Productspage/Productspage';
-import CartPage from './Cartpage/Cartpage';
-import ProductDetails from './Detailsproudct';
+import Footer from './Components/Layout/Footer';
+import Productspage from './Components/Productspage/Productspage';
+import CartPage from './Components/Cartpage/Cartpage';
+import ProductDetails from './Components/Detailsproudct';
 import { Contextprovider } from './Context/Productscontext';
 import Checkout from './Components/Checkout';
 import AboutPage from './Components/Aboutpage';
@@ -17,7 +17,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import gsap from "gsap";
 import { useRef } from 'react';
-import Hero from './Homepage/Hero';
+import Hero from './Components/Homepage/Hero';
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 function App() {
@@ -67,7 +67,7 @@ function App() {
                     <Footer/>
                   </>
                 }></Route>
-                <Route path='about' element={
+                <Route path='/about' element={
                   <>
                     <AboutPage></AboutPage>
                   </>

@@ -1,0 +1,23 @@
+// Image mapping for all products
+export const imageMap = {
+    "headphones-1": "/images/headphones-1.jpg",
+    "watch-rolex": "/images/watch-rolex.jpg",
+    "shoes-nike": "/images/shoes-nike.jpg",
+    "watch-casio": "/images/watch-casio.jpg",
+    "phone-iphone": "/images/phone-iphone.jpg",
+    "headphones-sony": "/images/headphones-sony.jpg",
+    "shoes-adidas": "/images/shoes-adidas.jpg",
+    "phone-samsung": "/images/phone-samsung.jpg",
+    "headphones-bose": "/images/headphones-bose.jpg",
+    "headphones-classic": "/images/headphones-classic.jpg",
+    "shoes-samba": "/images/shoes-samba.jpg",
+    "watch-seiko": "/images/watch-seiko.jpg",
+    "watch-garmin": "/images/watch-garmin.jpg",
+    "headphones-sennheiser": "/images/headphones-sennheiser.jpg",
+    "shoes-nb": "/images/shoes-nb.jpg",
+    "phone-oneplus": "/images/phone-oneplus.jpg",
+    "phone-pixel": "/images/phone-pixel.jpg",
+    "speaker-jbl": "/images/speaker-jbl.jpg",
+    "shoes-puma": "/images/shoes-puma.jpg",
+    "mic-audio": "/images/mic-audio.jpg",
+    };

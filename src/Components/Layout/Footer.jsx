@@ -4,7 +4,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 py-16">
             <div className="flex flex-col md:flex-row justify-between gap-12">
             <div className="max-w-sm">
-                <h2 className="text-2xl font-bold" style={{ color: '#C8A882', fontFamily: "'Playfair Display', serif" }}>LUXE</h2>
+                <h2 className="text-2xl font-bold" style={{ color: '#C8A882', fontFamily: "'Playfair Display', serif" }}>VELORA</h2>
                 <p className="mt-4 leading-relaxed" style={{ color: 'rgba(200,168,130,0.8)' }}>
                 Elevating everyday life through premium crafted products and modern design.
                 </p>
@@ -42,7 +42,7 @@ export default function Footer() {
             </div>
             <div className="mt-12 pt-6 flex flex-col md:flex-row justify-between items-center gap-4" style={{ borderTop: '1px solid rgba(200,168,130,0.2)' }}>
             <p className="text-sm text-center md:text-left" style={{ color: 'rgba(200,168,130,0.6)' }}>
-                © 2024 LUXE Premium E-commerce. All rights reserved.
+                © 2024 VELORA Premium E-commerce. All rights reserved.
             </p>
             <div className="flex gap-4 text-xl" style={{ color: 'rgba(200,168,130,0.6)' }}>
             </div>

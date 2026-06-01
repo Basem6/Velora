@@ -1,4 +1,5 @@
     import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router-dom";
 
     const STATS = [
     { number: "12+", label: "Years of craft" },
@@ -261,7 +262,7 @@
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 56, fontWeight: 700, color: "#F0ECE4", lineHeight: 1.1, marginBottom: "2.5rem" }}>
             Find your pair.
         </h2>
-        <button style={{
+        <NavLink to="/Shop"  style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: 13, fontWeight: 500,
             letterSpacing: "0.1em", textTransform: "uppercase",
@@ -270,7 +271,7 @@
             border: "none", cursor: "pointer",
         }}>
             Shop the collection
-        </button>
+        </NavLink>
         </section>
     );
     }
@@ -278,7 +279,6 @@
     export default function AboutSection() {
     return (
         <div className="py-14">
-            <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
             <div style={{ fontFamily: "'DM Sans', sans-serif", background: "#0D0D0D", color: "#F0ECE4", minHeight: "100vh" } } >
                 <div> <HeroBlock /></div>
                 {/* Marquee strip 1 — outline */}

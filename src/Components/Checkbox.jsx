@@ -1,117 +1,117 @@
-import React from 'react';
 import styled from 'styled-components';
+    const Checkbox = ({onhandle}) => {
+    return (
+        <StyledWrapper>
+        <div title="Like" className="heart-container min-w-full">
+            <input id="Give-It-An-Id" className="checkbox" type="checkbox" onClick={onhandle} />
+            <div className="svg-container">
+            <svg xmlns="http://www.w3.org/2000/svg" className="svg-outline" viewBox="0 0 24 24">
+                <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                </path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" className="svg-filled" viewBox="0 0 24 24">
+                <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                </path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height={100} width={100} className="svg-celebrate">
+                <polygon points="10,10 20,20" />
+                <polygon points="10,50 20,50" />
+                <polygon points="20,80 30,70" />
+                <polygon points="90,10 80,20" />
+                <polygon points="90,50 80,50" />
+                <polygon points="80,80 70,70" />
+            </svg>
+            </div>
+        </div>
+        </StyledWrapper>
+    );
+    }
 
-const Checkbox = () => {
-  return (
-    <StyledWrapper>
-      <input type="checkbox" className="ui-checkbo" />
-    </StyledWrapper>
-  );
-}
+    const StyledWrapper = styled.div`
+    .heart-container {
+        --heart-color: #C8A882;
+        position: relative;
+        width: 30px;
+        height: 30px;
+        transition: .3s;
+    }
 
-const StyledWrapper = styled.div`
-  /* checkbox settings 👇 */
+    .heart-container .checkbox {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 20;
+        cursor: pointer;
+    }
 
-  .ui-checkbox {
-    --primary-color: #fff;
-    --secondary-color: #fff;
-    --primary-hover-color: #4096ff;
-    /* checkbox */
-    --checkbox-diameter: 20px;
-    --checkbox-border-radius: 5px;
-    --checkbox-border-color: #d9d9d9;
-    --checkbox-border-width: 1px;
-    --checkbox-border-style: solid;
-    /* checkmark */
-    --checkmark-size: 1.2;
-  }
+    .heart-container .svg-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-  .ui-checkbox, 
-  .ui-checkbox *, 
-  .ui-checkbox *::before, 
-  .ui-checkbox *::after {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+    .heart-container .svg-outline,
+            .heart-container .svg-filled {
+        fill: var(--heart-color);
+        position: absolute;
+    }
 
-  .ui-checkbox {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: var(--checkbox-diameter);
-    height: var(--checkbox-diameter);
-    border-radius: var(--checkbox-border-radius);
-    background: var(--secondary-color);
-    border: var(--checkbox-border-width) var(--checkbox-border-style) var(--checkbox-border-color);
-    -webkit-transition: all 0.3s;
-    -o-transition: all 0.3s;
-    transition: all 0.3s;
-    cursor: pointer;
-    position: relative;
-  }
+    .heart-container .svg-filled {
+        animation: keyframes-svg-filled 1s;
+        display: none;
+    }
 
-  .ui-checkbox::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    -webkit-box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
-    box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
-    border-radius: inherit;
-    opacity: 0;
-    -webkit-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
-    -o-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
-    transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
-  }
+    .heart-container .svg-celebrate {
+        position: absolute;
+        animation: keyframes-svg-celebrate .5s;
+        animation-fill-mode: forwards;
+        display: none;
+        stroke: var(--heart-color);
+        fill: var(--heart-color);
+        stroke-width: 2px;
+    }
 
-  .ui-checkbox::before {
-    top: 40%;
-    left: 50%;
-    content: "";
-    position: absolute;
-    width: 4px;
-    height: 7px;
-    border-right: 2px solid var(--secondary-color);
-    border-bottom: 2px solid var(--secondary-color);
-    -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(0);
-    -ms-transform: translate(-50%, -50%) rotate(45deg) scale(0);
-    transform: translate(-50%, -50%) rotate(45deg) scale(0);
-    opacity: 0;
-    -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
-    -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
-    transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
-  }
+    .heart-container .checkbox:checked~.svg-container .svg-filled {
+        display: block
+    }
 
-  /* actions */
+    .heart-container .checkbox:checked~.svg-container .svg-celebrate {
+        display: block
+    }
 
-  .ui-checkbox:hover {
-    border-color: var(--primary-color);
-  }
+    @keyframes keyframes-svg-filled {
+        0% {
+        transform: scale(0);
+        }
 
-  .ui-checkbox:checked {
-    background: var(--primary-color);
-    border-color: transparent;
-  }
+        25% {
+        transform: scale(1.2);
+        }
 
-  .ui-checkbox:checked::before {
-    opacity: 1;
-    -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
-    -ms-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
-    transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
-    -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
-    -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
-    transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
-  }
+        50% {
+        transform: scale(1);
+        filter: brightness(1.5);
+        }
+    }
 
-  .ui-checkbox:active:not(:checked)::after {
-    -webkit-transition: none;
-    -o-transition: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    transition: none;
-    opacity: 1;
-  }`;
+    @keyframes keyframes-svg-celebrate {
+        0% {
+        transform: scale(0);
+        }
+
+        50% {
+        opacity: 1;
+        filter: brightness(1.5);
+        }
+
+        100% {
+        transform: scale(1.4);
+        opacity: 0;
+        display: none;
+        }
+    }`;
 
 export default Checkbox;

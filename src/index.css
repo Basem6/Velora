@@ -1,0 +1,21 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/rubik";
+@import "@fontsource/material-symbols-outlined";
+
+/* Material Symbols Icon Styling */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-flex;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}

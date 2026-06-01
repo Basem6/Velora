@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { CartContext } from '../Context/Productscontext';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -16,17 +16,15 @@ import { useToast } from '../Context/Toastcontext';
 export default function CartDrawer({ open, onClose }) {
     const { state, dispatch } = useContext(CartContext);
     const { showAlert } = useToast();
-    const [total, setTotal] = useState(0);
     const [current, setCurrent] = useState(0);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-    // Calculate total price
-    useEffect(() => {
-        const cartItems = state.filter((i) => i.addtocard === true);
-        const newTotal = cartItems.reduce((acc, item) => {
-            return acc + getPriceAfterDiscount(item.price, item.Discount) * item.countincart;
-        }, 0);
-        setTotal(newTotal);
-    }, [state]);
+    const total = useMemo(() => {
+        return state
+            .filter((item) => item.addtocard === true)
+            .reduce((acc, item) => {
+            return acc + (getPriceAfterDiscount(item.price, item.Discount) * item.countincart);
+            }, 0);
+        }, [state]);
 
     const cartItems = state.filter((item) => item.addtocard === true);
 
@@ -116,7 +114,7 @@ export default function CartDrawer({ open, onClose }) {
 
                     {/* Cart Items */}
                     {cartItems.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center flex-grow gap-4">
+                        <div className="flex flex-col items-center justify-center grow gap-4">
                             <p style={{ color: 'rgba(240,236,228,0.6)', fontSize: '16px' }}>
                                 Your cart is empty
                             </p>
@@ -128,7 +126,7 @@ export default function CartDrawer({ open, onClose }) {
                         </div>
                     ) : (
                         <>
-                            <div className="flex-grow overflow-y-auto mb-6">
+                            <div className="grow overflow-y-auto mb-6">
                                 <div className="flex flex-col gap-4">
                                     {state.map((item, index) => {
                                         if (item.addtocard) {
@@ -140,7 +138,7 @@ export default function CartDrawer({ open, onClose }) {
                                                 >
                                                     <div className="flex gap-3">
                                                         {/* Image */}
-                                                        <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0" style={{ backgroundColor: '#1a1a1a' }}>
+                                                        <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0" style={{ backgroundColor: '#1a1a1a' }}>
                                                             <img
                                                                 src={item.img}
                                                                 alt={item.name}
@@ -149,7 +147,7 @@ export default function CartDrawer({ open, onClose }) {
                                                         </div>
 
                                                         {/* Item Details */}
-                                                        <div className="flex-grow">
+                                                        <div className="grow">
                                                             <h3 className="text-sm font-semibold" style={{ color: '#F0ECE4' }}>
                                                                 {item.name}
                                                             </h3>

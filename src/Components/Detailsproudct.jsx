@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useState , useContext} from "react";
-import { getPriceAfterDiscount } from './utils/priceUtils';
+import { getPriceAfterDiscount } from '../utils/priceUtils';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-import { CartContext } from "./Context/Productscontext";
+import { CartContext } from "../Context/Productscontext";
 import Checkbox from "./Checkbox";
-import { useToast } from './Context/Toastcontext'
+import { useToast } from '../Context/Toastcontext'
 export default function ProductDetails() {
     const { showAlert } = useToast()
     const {state , dispatch} = useContext(CartContext)
@@ -40,7 +40,7 @@ export default function ProductDetails() {
     }
     const priceAfterOffer = getPriceAfterDiscount(current.price, current.Discount)
     return (
-        <main className=" mt-16 max-w-[1400px] mx-auto px-4 md:px-10 py-12 min-h-screen "  style={{ backgroundColor: '#0D0D0D' }}>
+        <main className=" mt-16 max-w-650 mx-auto px-4 md:px-10 py-12 min-h-screen "  style={{ backgroundColor: '#0D0D0D' }}>
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">
             <div className="lg:col-span-7 flex flex-col md:flex-row-reverse gap-4">
             {/* Main Image */}
@@ -48,7 +48,7 @@ export default function ProductDetails() {
                 <img
                 src={current.img}
                 alt={current.name}
-                className="w-full h-full object-cover aspect-square md:h-[600px]"
+                className="w-full h-full object-cover aspect-square md:h-150"
                 />
             </div>
             </div>
