@@ -102,12 +102,10 @@ export default function Hero({smootherRef}) {
         gsap.set(".slide", {
             clearProps: "all",
         });
-
+    });
     return () => {
         mm.revert();
     };
-    });
-
     },{ scope: main2, dependencies: [] })
     return (
         <div className="py-14">

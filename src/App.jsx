@@ -23,12 +23,36 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 function App() {
   const smootherRef = useRef(null);
   useGSAP(()=>{
-      smootherRef.current =ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1.5,
-      effects: true,
-    });
+      const mm = gsap.matchMedia();
+      
+      // Desktop: stronger smooth scrolling effect
+      mm.add("(min-width: 768px)", () => {
+        smootherRef.current = ScrollSmoother.create({
+          wrapper: "#smooth-wrapper",
+          content: "#smooth-content",
+          smooth: 1.5,
+          effects: true,
+        });
+      });
+      
+      // Mobile: lighter smooth scrolling (better for touch)
+      mm.add("(max-width: 767px)", () => {
+        smootherRef.current = ScrollSmoother.create({
+          wrapper: "#smooth-wrapper",
+          content: "#smooth-content",
+          smooth: 0.8,
+          effects: true,
+          smoothTouch: true,
+        });
+      });
+      
+      return () => {
+        mm.revert();
+        if (smootherRef.current) {
+          smootherRef.current.kill();
+          smootherRef.current = null;
+        }
+      };
   })
   return (
     <>
