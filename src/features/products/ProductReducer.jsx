@@ -56,6 +56,12 @@ const ProductReducer = (state, action) => {
                     return item
                 }
         })
+        case "clearCart":
+            return state.map((item) => ({
+                ...item,
+                addtocard: false,
+                countincart: 1
+            }))
     default:
     return  state;
     }

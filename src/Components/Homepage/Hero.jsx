@@ -88,13 +88,15 @@ export default function Hero({smootherRef}) {
             scrollTrigger: {
                 trigger: "#horizontall",
                 pin: true,
+                anticipatePin: 1,
+                pinType: "transform",
                 start: "top top",
                 scrub: 1,
-                end: "+=5000",
+                end: `+=${1000 * slides.length}`,
                 invalidateOnRefresh: true,
-            },
+                fastScrollEnd: true
+            }
         });
-
     });
     // Mobile
     mm.add("(max-width: 767px)", () => {
@@ -147,7 +149,7 @@ export default function Hero({smootherRef}) {
                 </div>
                 </div>
             </section>  
-            {showOverlay?
+            {showOverlay&&
             <div 
             className="overlay fixed inset-0 pointer-events-none bg-transparent left-0 top-0 z-50 flex flex-col items-center justify-center gap-40 overflow-x-hidden overflow-y-hidden"
             style={{ display:"flex"}} 
@@ -162,14 +164,14 @@ export default function Hero({smootherRef}) {
                         <div className="h-full bg-white left-0 top-0 rounded-lg" ref={loading}></div>
                     </div>
                 </div>
-            </div>:""
+            </div>
             }
             </main>
             <section className="relative min-h-screen bg-black" ref={main2}>
                     <div className="min-h-screen" id="deals"><HeroSlider></HeroSlider></div>
                     <div id="horizontall" className="">
-                            <div className="anmation relative overflow-hidden bg-transparent min-w-full min-h-screen rounded-t-lg shadow-lg shadow-gray-900/25 flex flex-col md:flex-row">
-                            <div className="part1 min-w-full slide ">
+                            <div className="anmation relative overflow-hidden bg-transparent min-w-full min-h-screen rounded-t-lg shadow-lg shadow-gray-900/25 flex flex-col md:flex-row" >
+                            <div className="part1 min-w-full slide" >
                                 <section className="min-h-full bg-black flex items-center justify-center  flex-wrap flex-col lg:flex-row">
                                     <div style={{ position: "relative", padding: "3rem 4rem" }}>
                                         <p style={{ fontSize: 17, letterSpacing: "0.2em", textTransform: "uppercase", color: "#C8A882", marginBottom: "1rem" }}>Limited time offer</p>
@@ -188,7 +190,7 @@ export default function Hero({smootherRef}) {
                                     </div>
                                 </section>
                             </div>
-                            <div className="part2 min-w-full slide ">
+                            <div className="part2 min-w-full slide" >
                                 <div style={{ minHeight: "100%", borderBottom: "0.5px solid #e5e5e5" }} className="lg:grid grid-cols-2 ">
                                     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", background: "#f3f0ea"}} className="p-9 min-w-full">
                                     <p style={{ fontSize: 18, letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1rem" }}>

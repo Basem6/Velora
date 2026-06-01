@@ -1,8 +1,97 @@
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useState } from "react";
 import { CartContext } from "../Context/Productscontext";
 import { getPriceAfterDiscount } from '../utils/priceUtils';
+import { useToast } from "../Context/Toastcontext";
+
 export default function Checkout() {
-    const {state} = useContext(CartContext)
+    const {state, dispatch} = useContext(CartContext);
+    const { showAlert } = useToast();
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        address: '',
+        city: '',
+        postalCode: '',
+        cardNumber: '',
+        expiryDate: '',
+        cvv: ''
+    });
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleInputChange = (e) => {
+        const { id, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [id]: value
+        }));
+    };
+
+    const validateForm = () => {
+        if (!formData.firstName.trim()) {
+            showAlert('error', 'First Name is required');
+            return false;
+        }
+        if (!formData.lastName.trim()) {
+            showAlert('error', 'Last Name is required');
+            return false;
+        }
+        if (!formData.address.trim()) {
+            showAlert('error', 'Address is required');
+            return false;
+        }
+        if (!formData.city.trim()) {
+            showAlert('error', 'City is required');
+            return false;
+        }
+        if (!formData.postalCode.trim()) {
+            showAlert('error', 'Postal Code is required');
+            return false;
+        }
+        if (!formData.cardNumber.trim() || formData.cardNumber.replace(/\s/g, '').length < 13) {
+            showAlert('error', 'Valid card number is required');
+            return false;
+        }
+        if (!formData.expiryDate.trim() || !/^\d{2}\/\d{2}$/.test(formData.expiryDate)) {
+            showAlert('error', 'Expiry Date must be MM/YY');
+            return false;
+        }
+        if (!formData.cvv.trim() || formData.cvv.length < 3) {
+            showAlert('error', 'Valid CVV is required');
+            return false;
+        }
+        return true;
+    };
+
+    const handleCompletePurchase = async () => {
+        if (!validateForm()) return;
+
+        setIsLoading(true);
+        
+        // Simulate payment processing
+        try {
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            showAlert('success', 'Order completed successfully!');
+            
+            // Clear cart
+            dispatch({ type: 'clearCart' });
+            
+            // Reset form
+            setFormData({
+                firstName: '',
+                lastName: '',
+                address: '',
+                city: '',
+                postalCode: '',
+                cardNumber: '',
+                expiryDate: '',
+                cvv: ''
+            });
+        } catch {
+            showAlert('error',  'Payment failed. Please try again');
+        } finally {
+            setIsLoading(false);
+        }
+    };
     const total = useMemo(() => {
     return state
         .filter((item) => item.addtocard === true)
@@ -42,9 +131,11 @@ export default function Checkout() {
 
                     <input
                         type="text"
-                        placeholder="John"
-                        className="w-full rounded-xl px-4 py-3 outline-none transition-all"
-                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid', color: '#F0ECE4' }}
+                        id="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        className="w-full rounded-xl px-4 py-3 outline-none transition-all focus:border-[#C8A882]"
+                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.3)', border: '1.5px solid', color: '#F0ECE4' }}
                     />
                     </div>
 
@@ -55,9 +146,11 @@ export default function Checkout() {
 
                     <input
                         type="text"
-                        placeholder="Doe"
-                        className="w-full rounded-xl px-4 py-3 outline-none transition-all"
-                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid', color: '#F0ECE4' }}
+                        id="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        className="w-full rounded-xl px-4 py-3 outline-none transition-all focus:border-[#C8A882]"
+                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.3)', border: '1.5px solid', color: '#F0ECE4' }}
                     />
                     </div>
 
@@ -68,9 +161,11 @@ export default function Checkout() {
 
                     <input
                         type="text"
-                        placeholder="123 Luxury Ave"
-                        className="w-full rounded-xl px-4 py-3 outline-none transition-all"
-                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid', color: '#F0ECE4' }}
+                        id="address"
+                        value={formData.address}
+                        onChange={handleInputChange}
+                        className="w-full rounded-xl px-4 py-3 outline-none transition-all focus:border-[#C8A882]"
+                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.3)', border: '1.5px solid', color: '#F0ECE4' }}
                     />
                     </div>
 
@@ -81,9 +176,11 @@ export default function Checkout() {
 
                     <input
                         type="text"
-                        placeholder="New York"
-                        className="w-full rounded-xl px-4 py-3 outline-none transition-all"
-                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid', color: '#F0ECE4' }}
+                        id="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        className="w-full rounded-xl px-4 py-3 outline-none transition-all focus:border-[#C8A882]"
+                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.3)', border: '1.5px solid', color: '#F0ECE4' }}
                     />
                     </div>
 
@@ -94,9 +191,11 @@ export default function Checkout() {
 
                     <input
                         type="text"
-                        placeholder="10001"
-                        className="w-full rounded-xl px-4 py-3 outline-none transition-all"
-                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid', color: '#F0ECE4' }}
+                        id="postalCode"
+                        value={formData.postalCode}
+                        onChange={handleInputChange}
+                        className="w-full rounded-xl px-4 py-3 outline-none transition-all focus:border-[#C8A882]"
+                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.3)', border: '1.5px solid', color: '#F0ECE4' }}
                     />
                     </div>
                 </div>
@@ -127,9 +226,12 @@ export default function Checkout() {
                     <div className="relative">
                         <input
                         type="text"
-                        placeholder="0000 0000 0000 0000"
-                        className="w-full rounded-xl pl-4 pr-12 py-3 outline-none transition-all"
-                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid', color: '#F0ECE4' }}
+                        id="cardNumber"
+                        value={formData.cardNumber}
+                        onChange={handleInputChange}
+                        maxLength="19"
+                        className="w-full rounded-xl pl-4 pr-12 py-3 outline-none transition-all focus:border-[#C8A882]"
+                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.3)', border: '1.5px solid', color: '#F0ECE4' }}
                         />
 
                         <span className="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined" style={{ color: 'rgba(200,168,130,0.4)' }}>
@@ -147,9 +249,13 @@ export default function Checkout() {
 
                         <input
                         type="text"
+                        id="expiryDate"
+                        value={formData.expiryDate}
+                        onChange={handleInputChange}
                         placeholder="MM/YY"
-                        className="w-full rounded-xl px-4 py-3 outline-none transition-all"
-                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid', color: '#F0ECE4' }}
+                        maxLength="5"
+                        className="w-full rounded-xl px-4 py-3 outline-none transition-all focus:border-[#C8A882]"
+                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.3)', border: '1.5px solid', color: '#F0ECE4' }}
                         />
                     </div>
 
@@ -160,9 +266,12 @@ export default function Checkout() {
 
                         <input
                         type="password"
-                        placeholder="***"
-                        className="w-full rounded-xl px-4 py-3 outline-none transition-all"
-                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.2)', border: '1px solid', color: '#F0ECE4' }}
+                        id="cvv"
+                        value={formData.cvv}
+                        onChange={handleInputChange}
+                        maxLength="4"
+                        className="w-full rounded-xl px-4 py-3 outline-none transition-all focus:border-[#C8A882]"
+                        style={{ backgroundColor: 'rgba(200,168,130,0.05)', borderColor: 'rgba(200,168,130,0.3)', border: '1.5px solid', color: '#F0ECE4' }}
                         />
                     </div>
                     </div>
@@ -265,8 +374,13 @@ export default function Checkout() {
                     </div>
                     </div>
 
-                    <button className="w-full mt-8 py-4 rounded-full font-semibold hover:scale-[1.02] transition-all duration-200" style={{ backgroundColor: '#C8A882', color: '#0D0D0D' }}>
-                    Complete Purchase
+                    <button 
+                        onClick={handleCompletePurchase}
+                        disabled={isLoading}
+                        className="w-full mt-8 py-4 rounded-full font-semibold hover:scale-[1.02] transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed" 
+                        style={{ backgroundColor: '#C8A882', color: '#0D0D0D' }}
+                    >
+                        {isLoading ? 'Processing...' : 'Complete Purchase'}
                     </button>
 
                     <p className="text-center text-sm mt-4 px-4" style={{ color: 'rgba(200,168,130,0.6)' }}>
