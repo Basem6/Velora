@@ -82,5 +82,5 @@ Frontend Developer passionate about creating modern, interactive, and user-frien
 
 ### Connect with me
 
-- LinkedIn: Your LinkedIn Profile
+- LinkedIn: https://www.linkedin.com/in/basem-mahmoud-831162399/
 - GitHub: https://github.com/Basem6/
