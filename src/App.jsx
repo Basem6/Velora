@@ -15,13 +15,18 @@ import WishlistPage from './Components/LoveProducts';
 import { useGSAP } from '@gsap/react';
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollSmoother from "gsap/ScrollSmoother";
+import SplitText from "gsap/ScrollSmoother";
 import gsap from "gsap";
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Hero from './Components/Homepage/Hero';
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(SplitText,ScrollTrigger,ScrollSmoother);
 
 function App() {
+  const [tl , setTl] =useState(null);
   const smootherRef = useRef(null);
+  const [showOverlay] = useState(() => {
+    return !sessionStorage.getItem("hero-animation-done");
+  });
   useGSAP(()=>{
       const mm = gsap.matchMedia();
       
@@ -54,8 +59,49 @@ function App() {
         }
       };
   })
+  //use REf
+    const loading= useRef(null);
+    const container2= useRef(null);
+    const left= useRef(null);
+    const right= useRef(null);
+    const main1= useRef(null);
+    useGSAP(() => {
+    if (
+    !loading.current    ||
+    !left.current       ||
+    !right.current      ||
+    !container2.current 
+    ) return;
+    const tl_h = gsap.timeline({
+      onComplete: () => {
+        sessionStorage.setItem("hero-animation-done", "true");
+        main1.current.remove(); 
+      }
+    });
+    setTl(tl_h);
+    tl_h.from(container2.current, { opacity: 0, scale: 0.93, duration: 0.5, ease: "power2.out" },);
+    tl_h.from(loading.current, { width: "0%", duration: 1.5, ease: "power2.out" });
+    tl_h.to(container2.current, { opacity: 0, scale: 0.93, duration: 0.3, ease: "power2.out" },);
+    tl_h.to(left.current, { x: "-110%", duration: 1.5, ease: "power2.inOut" }, "-=0.3");
+    tl_h.to(right.current, { x: "110%", duration: 1.5, ease: "power2.inOut" }, "<");
+    tl_h.to(main1.current, {zIndex:-150,}, "<");
+}, { scope: main1, dependencies: [] });
   return (
     <>
+    {showOverlay && 
+    <div  className="overlay fixed z-150  left-0 top-0 flex items-center justify-center gap-40 min-w-full min-h-full bg-transparent" ref={main1}>
+                      <div className=" absolute inset-0 bg-black max-w-1/2 min-w-1/2 max-h-full min-h-full -z-50" ref={left} ></div>
+                      <div className=" absolute inset-0 bg-black left-1/2 top-0 max-w-1/2 min-w-1/2 max-h-full min-h-full -z-50" ref={right} ></div>
+                      <div ref={container2} className="flex flex-col items-center justify-center gap-6">
+                          <h1 className="text-3xl font-bold text-white opacity-60 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>
+                              Premium Quality, Unmatched Style
+                          </h1>
+                          <div className="w-80 h-1 bg-white/10 rounded-lg relative overflow-hidden">
+                              <div className="h-full bg-white rounded-lg" ref={loading} style={{ width: "100%" }}></div>
+                          </div>
+                      </div>
+    </div>
+  }
     <ToastContext>
       < Contextprovider>
         <div id="smooth-wrapper">
@@ -63,7 +109,7 @@ function App() {
             <Routes>
                 <Route path="/" element={
                   <>
-                    <Hero smootherRef={smootherRef}></Hero>
+                    <Hero smootherRef={smootherRef} tl={tl}></Hero>
                     <Footer/>
                   </>
                 } />

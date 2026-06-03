@@ -83,7 +83,7 @@ export default function CartPage() {
             <Button onClick={confirmAgree}>Agree</Button>
             </DialogActions>
         </Dialog>
-        <main className="max-w-[1400px] mx-auto w-full px-4 md:px-10 py-16 min-h-screen relative mt-12" style={{ backgroundColor: '#0D0D0D' }}>
+        <main className="max-w-350 mx-auto w-full px-4 md:px-10 py-16 min-h-screen relative mt-12" style={{ backgroundColor: '#0D0D0D' }}>
         <div className="flex flex-col gap-12">
             {/* Header */}
             <div className="flex flex-col gap-4">
@@ -119,7 +119,7 @@ export default function CartPage() {
                                 />
                             </div>
 
-                            <div className="flex-grow flex flex-col gap-2 ">
+                            <div className="grow flex flex-col gap-2 ">
                                 <div className="flex justify-between items-center gap-6">
                                 <div className="flex flex-col">
                                     <span className="text-xs uppercase tracking-[0.25em] mb-2" style={{ color: 'rgba(200,168,130,0.6)' }}>
@@ -229,7 +229,7 @@ export default function CartPage() {
                             Proceed to Checkout
                         </button>
                     </Link>
-                    <button className="w-full border text-base font-medium py-4 rounded-2xl transition-all duration-300" style={{ borderColor: 'rgba(200,168,130,0.2)', backgroundColor: 'rgba(200,168,130,0.05)', color: '#F0ECE4' }}>
+                    <button className="w-full cursor-no-drop border text-base font-medium py-4 rounded-2xl transition-all duration-300" style={{ borderColor: 'rgba(200,168,130,0.2)', backgroundColor: 'rgba(200,168,130,0.05)', color: '#F0ECE4' }}>
                         Pay with Apple Pay
                     </button>
                     </div>
@@ -260,10 +260,10 @@ export default function CartPage() {
                     <input
                     type="text"
                     placeholder="Enter code"
-                    className="flex-grow rounded-xl px-4 py-3 outline-none focus:ring-1"
+                    className="grow rounded-xl px-4 py-3 outline-none focus:ring-1"
                     style={{ backgroundColor: 'rgba(200,168,130,0.08)', color: '#F0ECE4' }}
                     />
-                    <button className="flex-grow text-white px-5 py-2 rounded-xl hover:opacity-90 transition-all" style={{ backgroundColor: '#C8A882', color: '#0D0D0D' }}>
+                    <button disabled className="grow text-white px-5 py-2 rounded-xl hover:opacity-90 transition-all cursor-no-drop" style={{ backgroundColor: '#C8A882', color: '#0D0D0D' }}>
                     Apply
                     </button>
                 </div>

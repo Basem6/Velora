@@ -120,8 +120,8 @@ export default function Productspage() {
                                 {sortOption === 'name-asc' && 'Name: A to Z'}
                                 {sortOption === 'name-desc' && 'Name: Z to A'}
                             </span>
-                            <span className={`transition ${showSortMenu ? 'rotate-180' : ''}`} style={{ color: 'rgba(240,236,228,0.4)' }}>
-                                ↓
+                            <span className={`transition ${showSortMenu ? 'rotate-180' : ''} fa-solid fa-chevron-down text-sm` } style={{ color: 'rgba(240,236,228,0.4)' }}>
+                                
                             </span>
                         </button>
                         {showSortMenu && (

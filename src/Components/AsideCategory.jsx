@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Slider from '@mui/material/Slider';
+import CheckboxCategory from './Checkboxcategory';
 export function AsideCategory({categories , selectedCategories , handleCategoryChange ,priceRange ,handlePriceChange,value,setValue,setCurrentPage}){
     return(
     <aside className="w-full md:w-72 lg:block space-y-10">
@@ -15,13 +16,8 @@ export function AsideCategory({categories , selectedCategories , handleCategoryC
                     className="flex items-center gap-3 cursor-pointer transition"
                     style={{ color: 'rgba(240,236,228,0.6)' }}
                     >
-                    <input
-                        type="checkbox"
-                        className="w-4 h-4"
-                        style={{ accentColor: '#C8A882' }}
-                        checked={selectedCategories.includes(category)}
-                        onChange={() => handleCategoryChange(category)}
-                    />
+                    
+                    <CheckboxCategory onChange={() => handleCategoryChange(category)} checked={selectedCategories.includes(category)} />
                     {category}
                     </label>
                 ))}

@@ -262,7 +262,7 @@ import { NavLink } from "react-router-dom";
         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 56, fontWeight: 700, color: "#F0ECE4", lineHeight: 1.1, marginBottom: "2.5rem" }}>
             Find your pair.
         </h2>
-        <NavLink to="/Shop"  style={{
+        <NavLink to="/Shop" className={"whitespace-nowrap"}  style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: 13, fontWeight: 500,
             letterSpacing: "0.1em", textTransform: "uppercase",
