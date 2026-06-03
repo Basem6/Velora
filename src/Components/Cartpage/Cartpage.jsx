@@ -31,7 +31,7 @@ export default function CartPage() {
         const newtotal = filter.reduce((acc, item) => {
         return acc + (getPriceAfterDiscount(item.price, item.Discount) * item.countincart);
         }, 0);
-        settotal(newtotal)
+        settotal(newtotal.toFixed(2))
     },[state])
     const cartItems =state.filter((item)=>{
         return item.addtocard===true

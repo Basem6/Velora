@@ -184,7 +184,7 @@ export default function Productspage() {
                     .map((product) => {
                         const actualIndex = state.indexOf(product);
                         return (
-                            <Link key={actualIndex} to={`/product/${actualIndex + 1}`}>
+                            <Link key={actualIndex} to={`/product/${actualIndex + 1}`} className='card'>
                             <CartDetailsproduct index={actualIndex} product={product} />
                             </Link>
                         );

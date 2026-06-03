@@ -27,10 +27,6 @@ export default function Navbar() {
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
-        gsap.to(hamburgerRef.current, {
-            rotation: mobileMenuOpen ? 0 : 180,
-            duration: 0.3,
-        });
     };
 
     const closeMobileMenu = () => {

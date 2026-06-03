@@ -17,7 +17,8 @@ export default function Hero({smootherRef , tl}) {
     const titleheader= useRef(null);
     const texthero= useRef(null);
     const btnleft= useRef(null);
-    const btnright= useRef();
+    const btnright= useRef(null);
+    const texthero2= useRef(null); 
     const scrollToSection = (id) => {
         smootherRef.current.scrollTo(id, true, "top 80px");
     };
@@ -34,27 +35,27 @@ export default function Hero({smootherRef , tl}) {
     ) return;
     let splitText = SplitText.create(texthero.current, {
         type: "lines",
-        mask: "lines"
+        mask: "lines",
     });
     let splitHeader = SplitText.create(Header.current, {
         type: "words",
     });
     tl.from(splitHeader.words, { opacity: 0, x: -16, duration: 1.7, ease: "none",stagger: 0.2 },'-=0.9');
-    tl.from(texthero.current, { opacity: 0, y: 80, duration: 0.8, ease: "power2.out" }, "-=0.5");
-    tl.from(splitText.lines, { y: 30, duration: 0.8, ease: "power2.out", stagger: 0.1, opacity: 0 }, "<");
-    tl.from(btnleft.current, { opacity: 0, x: -100, duration: 1, ease: "power2.out" }, "-=0.5");
+    tl.from(splitText.lines, { duration: 1.9, stagger: 0.18,  yPercent: 100,ease: "expo.out",}, "-=0.4");
+    tl.from(btnleft.current, { opacity: 0, x: -100, duration: 1, ease: "power2.out" }, "-=1.1");
     tl.from(btnright.current, { opacity: 0, x: 100, duration: 1, ease: "power2.out" }, "<");
     tl.fromTo(titleheader.current, { width: "0px" }, { width: "100%", duration: 1.6, ease: "none" }, "-=0.5");
     return () => {
-        splitText.revert();
+        
         splitHeader.revert();
+        splitText.revert();
     };
 }, { scope: main, dependencies: [tl] });
 
     useGSAP(() => {
     const mm = gsap.matchMedia();
     // Desktop only
-    mm.add("(min-width: 768px)", () => {
+    mm.add("(min-width: 1024px)", () => {
         const slides = gsap.utils.toArray(".slide");
         gsap.from(".anmation", {
             scrollTrigger: {
@@ -83,7 +84,7 @@ export default function Hero({smootherRef , tl}) {
         });
     });
     // Mobile
-    mm.add("(max-width: 767px)", () => {
+    mm.add("(max-width: 1024px)", () => {
         // reset any transforms
         gsap.set(".slide", {
             clearProps: "all",
@@ -93,6 +94,21 @@ export default function Hero({smootherRef , tl}) {
         mm.revert();
     };
     },{ scope: main2, dependencies: [] })
+    useGSAP(() => {
+        const splitText = SplitText.create(texthero2.current, {
+            type: "lines",
+        });
+        gsap.from(splitText.lines,{
+            scrollTrigger: {
+            trigger: texthero2.current,
+            start: "top 80%",
+            },
+            opacity:0.2,
+            duration:0.7,
+            stagger:0.3,
+            ease:"none"
+        });
+    });
     return (
         <div className="py-14">
             <main    className="w-full overflow-x-hidden relative" ref={main}>
@@ -107,7 +123,7 @@ export default function Hero({smootherRef , tl}) {
                 </div>
 
                 <h1 className="text-5xl md:text-6xl font-bold mb-6" ref={Header} style={{ color: '#F0ECE4', fontFamily: "'Playfair Display', serif" }}>
-                    Redefining <span style={{ color: '#C8A882' }}>Excellence</span>
+                    <span>Redefining </span><span style={{ color: '#C8A882' }}>Excellence</span>
                 </h1>
 
                 <p className="text-lg max-w-2xl mx-auto mb-10 leading-relaxed" ref={texthero} style={{ color: 'rgba(240,236,228,0.6)' }}>
@@ -130,31 +146,26 @@ export default function Hero({smootherRef , tl}) {
             </section>  
             </main>
             <section className="relative min-h-screen bg-black" ref={main2}>
-                    <div className="min-h-screen" id="deals"><HeroSlider></HeroSlider></div>
+                    <div className="lg:min-h-screen mb- lg:mb-0 " id="deals"><HeroSlider></HeroSlider></div>
                     <div id="horizontall" className="">
-                            <div className="anmation relative overflow-hidden bg-transparent min-w-full min-h-screen rounded-t-lg shadow-lg shadow-gray-900/25 flex flex-col md:flex-row" >
+                            <div className="anmation relative overflow-hidden bg-transparent min-w-full min-h-screen rounded-t-lg shadow-lg shadow-gray-900/25 flex flex-col lg:flex-row" >
                             <div className="part1 min-w-full slide" >
-                                <section className="min-h-full bg-black flex items-center justify-center  flex-wrap flex-col lg:flex-row min-w-full">
-                                    <div style={{ position: "relative", padding: "3rem 4rem" }}>
-                                        <p style={{ fontSize: 17, letterSpacing: "0.2em", textTransform: "uppercase", color: "#C8A882", marginBottom: "1rem" }}>Limited time offer</p>
-                                        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 52, fontWeight: 700, color: "#F0ECE4", lineHeight: 1.1, marginBottom: "1.5rem" }}>
-                                        Up to 40% off<br /><em style={{ fontStyle: "italic", color: "rgba(240,236,228,0.6)" }}>selected styles.</em>
-                                        </h2>
-                                        <button style={{
-                                        fontFamily: "'DM Sans', sans-serif",
-                                        fontSize: 15, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase",
-                                        padding: "13px 34px", borderRadius: 4,
-                                        background: "#C8A882", color: "#0D0D0D",
-                                        border: "none", cursor: "pointer",
-                                        }}>
-                                        Shop the sale
-                                        </button>
+                                <section className="min-h-full bg-black flex items-center py-20 px-6 text-center    flex-wrap flex-col lg:flex-row min-w-full">
+                                    <div>
+                                        <p ref={texthero2} className="text-2xl lg:text-4xl" style={{
+                                            fontFamily: "'Playfair Display', serif",
+                                            fontWeight: 400,
+                                            color: "#F0ECE4", lineHeight: 1.5,
+                                            marginBottom: "2.5rem",
+                                            }}>
+                                            "We are committed<em style={{ color: "#C8A882" }}> to providing a secure,</em> reliable, and seamless shopping experience. Every order is protected through secure payment systems, fast shipping, and dedicated customer support. Your satisfaction is our priority, which is why we offer hassle-free returns and carefully curated products you can trust."
+                                            </p>
                                     </div>
                                 </section>
                             </div>
                             <div className="part2 min-w-full slide" >
                                 <div style={{ minHeight: "100%", borderBottom: "0.5px solid #e5e5e5" }} className="flex  justify-center  flex-row">
-                                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", background: "#f3f0ea"}} className="min-w-full lg:min-w-1/2 p-8">
+                                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", background: "#f3f0ea"}} className="min-w-full lg:min-w-1/2 p-8 ">
                                     <p style={{ fontSize: 18, letterSpacing: "0.18em", textTransform: "uppercase", color: "#999", marginBottom: "1rem" }}>
                                         New Collection · SS 2026
                                     </p>
@@ -166,7 +177,7 @@ export default function Hero({smootherRef , tl}) {
                                         Curated footwear for every occasion — from the streets to the summit.
                                     </p>
                                     </div>
-                                    <div  className="flex lg:justify-center overflow-hidden relative items-center bg-[#e8e4dc] min-w-full lg:min-w-1/2 p-8 ">
+                                    <div  className="hidden lg:flex lg:justify-center overflow-hidden relative items-center bg-[#e8e4dc] min-w-full lg:min-w-1/2 p-8 ">
                                     <span className="fa-solid fa-shop text-7xl text-gray-black/70"></span>
                                     <span style={{
                                         position: "absolute", bottom: "1.5rem", right: "1.5rem",
@@ -182,7 +193,7 @@ export default function Hero({smootherRef , tl}) {
                             </div> 
                             <div className="part3 min-w-full slide">
                                 <section 
-                                    className="min-h-full bg-black flex items-center justify-center  flex-wrap flex-col-reverse lg:flex-row lg:justify-between lg:p-7 py-5">
+                                    className="min-h-full bg-black flex items-center justify-center  flex-wrap flex-col-reverse md:flex-row lg:justify-between lg:p-7 py-5">
                                     <div style={{ position: "relative", padding: "3rem 4rem" }}>
                                         <p style={{ fontSize: 17, letterSpacing: "0.2em", textTransform: "uppercase", color: "#C8A882", marginBottom: "1rem" }}>Limited time offer</p>
                                         <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 52, fontWeight: 700, color: "#F0ECE4", lineHeight: 1.1, marginBottom: "1.5rem" }}>

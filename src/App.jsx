@@ -84,20 +84,20 @@ function App() {
     tl_h.to(container2.current, { opacity: 0, scale: 0.93, duration: 0.3, ease: "power2.out" },);
     tl_h.to(left.current, { x: "-110%", duration: 1.5, ease: "power2.inOut" }, "-=0.3");
     tl_h.to(right.current, { x: "110%", duration: 1.5, ease: "power2.inOut" }, "<");
-    tl_h.to(main1.current, {zIndex:-150,}, "<");
+    // tl_h.to(main1.current, {zIndex:-150,}, "<");
 }, { scope: main1, dependencies: [] });
   return (
     <>
     {showOverlay && 
     <div  className="overlay fixed z-150  left-0 top-0 flex items-center justify-center gap-40 min-w-full min-h-full bg-transparent" ref={main1}>
-                      <div className=" absolute inset-0 bg-black max-w-1/2 min-w-1/2 max-h-full min-h-full -z-50" ref={left} ></div>
-                      <div className=" absolute inset-0 bg-black left-1/2 top-0 max-w-1/2 min-w-1/2 max-h-full min-h-full -z-50" ref={right} ></div>
+                      <div className=" absolute inset-0 bg-gray-50 max-w-1/2 min-w-1/2 max-h-full min-h-full -z-50" ref={left} ></div>
+                      <div className=" absolute inset-0 bg-gray-50 left-1/2 top-0 max-w-1/2 min-w-1/2 max-h-full min-h-full -z-50" ref={right} ></div>
                       <div ref={container2} className="flex flex-col items-center justify-center gap-6">
-                          <h1 className="text-3xl font-bold text-white opacity-60 text-center" style={{ fontFamily: "'Playfair Display', serif" }}>
+                          <h1 className="text-4xl font-extrabold text-[#ff981a] text-center" style={{ fontFamily: "'Playfair Display', serif" }}>
                               Premium Quality, Unmatched Style
                           </h1>
-                          <div className="w-80 h-1 bg-white/10 rounded-lg relative overflow-hidden">
-                              <div className="h-full bg-white rounded-lg" ref={loading} style={{ width: "100%" }}></div>
+                          <div className="w-80 h-1 bg-[#C8A882]/50 rounded-lg relative overflow-hidden">
+                              <div className="h-full bg-[#C8A882] rounded-lg" ref={loading} style={{ width: "100%" }}></div>
                           </div>
                       </div>
     </div>
