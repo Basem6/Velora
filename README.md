@@ -1,16 +1,86 @@
-# React + Vite
+# 🛍️ E-Commerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive E-Commerce web application built with React, Tailwind CSS, and GSAP, providing a smooth and engaging shopping experience.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Responsive Design for all devices
+- Product Listing & Categories
+- Product Details Page
+- Advanced Filtering & Sorting
+- Shopping Cart Management
+- Wishlist Functionality
+- Smooth Animations with GSAP
+- Modern UI with Tailwind CSS
+- Fast Navigation using React Router
+- Optimized Performance
 
-## React Compiler
+## 🛠️ Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React.js
+- Vite
+- Tailwind CSS
+- GSAP
+- React Router DOM
+- Material UI
 
-## Expanding the ESLint configuration
+## 📸 Screenshots
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+## 📂 Project Structure
+
+```bash
+src/
+├── Components/
+├── Pages/
+├── Layout/
+├── Context/
+├── Hooks/
+├── Assets/
+└── App.jsx
+```
+
+## ⚡ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Basem6/Velora
+```
+
+Navigate to the project directory:
+
+```bash
+cd Velora
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+## 🎯 Future Improvements
+
+- User Authentication
+- Payment Gateway Integration
+- Order Tracking
+- Product Reviews & Ratings
+
+## 👨‍💻 Author
+
+**Basem Mahmoud**
+
+Frontend Developer passionate about creating modern, interactive, and user-friendly web experiences.
+
+### Connect with me
+
+- LinkedIn: Your LinkedIn Profile
+- GitHub: https://github.com/Basem6/
