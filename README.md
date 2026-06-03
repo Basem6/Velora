@@ -1,3 +1,4 @@
+[Home Page](./screenshots/Veloracart.png)
 # 🛍️ E-Commerce Website
 
 A modern and responsive E-Commerce web application built with React, Tailwind CSS, and GSAP, providing a smooth and engaging shopping experience.
