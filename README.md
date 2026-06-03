@@ -1,4 +1,4 @@
-./screenshots/Veloracart.png
+![Home](src/assests/screenshots/Velorahome)
 # 🛍️ E-Commerce Website
 
 A modern and responsive E-Commerce web application built with React, Tailwind CSS, and GSAP, providing a smooth and engaging shopping experience.
@@ -24,23 +24,6 @@ A modern and responsive E-Commerce web application built with React, Tailwind CS
 - GSAP
 - React Router DOM
 - Material UI
-
-## 📸 Screenshots
-
-
-
-## 📂 Project Structure
-
-```bash
-src/
-├── Components/
-├── Pages/
-├── Layout/
-├── Context/
-├── Hooks/
-├── Assets/
-└── App.jsx
-```
 
 ## ⚡ Installation
 
