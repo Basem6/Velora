@@ -1,0 +1,28 @@
+{
+  "cards": [
+    {
+      "headline": "The Weekend Uniform",
+      "kicker": "Women / 01",
+      "offer": "Up to 50% Off",
+      "copy": "Soft structure, slow mornings, and considered pieces for a considered wardrobe.",
+      "cta": "Shop Now",
+      "images": [
+        {"src": "/photos/women.jpg", "className": "main-image"},
+        {"src": "/photos/pexels-vishnu-v-n-184319568-11263067.jpg", "className": "secondary-image image-one"},
+        {"src": "/photos/FA25-FAHERTY-Mens-MXF2400-RNF-CoastlineKnitShirt-RedstoneForestPlaid-X_FRONT_OM_WS_1.webp", "className": "secondary-image image-two"}
+      ]
+    },
+    {
+      "headline": "The Edit: Departure",
+      "kicker": "Collection 02",
+      "offer": "Up to 40% Off",
+      "copy": "An instinctive edit of light layers, tactile accessories, and new-season movement.",
+      "cta": "Explore Offer",
+      "images": [
+        {"src": "/photos/SU25-FAHERTY-MENS-MWS2516-KAI-SsBreezeShirt-MolokaiScenicTropical_OM_EDITORIAL_1.webp", "className": "main-image"},
+        {"src": "/photos/tropical-style.png", "className": "secondary-image image-one"},
+        {"src": "/photos/man.jpg", "className": "secondary-image image-two"}
+      ]
+    }
+  ]
+}
