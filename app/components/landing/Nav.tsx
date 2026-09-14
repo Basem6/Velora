@@ -163,17 +163,12 @@ export default function Nav() {
                   <ArrowRight size={14} strokeWidth={1.3} className="opacity-0 transition group-hover:opacity-100" />
                 </Link>
               ))}
-            </div>
-
-            <div className="mt-auto border-t border-stone-200 pt-6">
+              <div className="mt-auto">
               <Link href="/wishlist" onClick={() => setMobileOpen(false)} className="mb-4 flex items-center justify-between gap-3 py-2 text-sm font-medium uppercase tracking-[0.2em] text-stone-800 transition hover:text-[#a47b4c]">
-                <span className="flex items-center gap-2"><Heart size={17} strokeWidth={1.4} /> Wishlist</span>
-                {wishlistCount > 0 && <span className="rounded-full bg-stone-950 px-2 py-1 text-[10px] text-white">{wishlistCount}</span>}
+                <span>Wishlist</span>
+                {wishlistCount > 0 && <span className="bg-stone-950 size-6 text-center flex items-center pl-0.5 justify-center rounded-full text-xs text-white">{wishlistCount}</span>}
               </Link>
-              <Link href="/cart" onClick={() => setMobileOpen(false)} className="flex items-center justify-between gap-3 py-2 text-sm font-medium uppercase tracking-[0.2em] text-stone-800 transition hover:text-[#a47b4c]">
-                <span className="flex items-center gap-2"><ShoppingCart size={17} strokeWidth={1.4} /> Bag</span>
-                {cartCount > 0 && <span className="rounded-full bg-stone-950 px-2 py-1 text-[10px] text-white">{cartCount}</span>}
-              </Link>
+            </div>
             </div>
           </div>
         </div>
