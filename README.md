@@ -36,7 +36,7 @@ The project is being developed with scalability in mind, allowing the current fr
 ## 🚀 Live Demo
 
 **Live Website:**
-https://e-commerce-uo5k83pi1-basem6s-projects.vercel.app/
+https://velora-dun-eta.vercel.app
 
 ---
 
