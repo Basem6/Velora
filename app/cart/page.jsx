@@ -82,66 +82,113 @@ export default function CartPage() {
             onConfirm={confirmRemove}
         />
 
-        <section className="min-h-screen px-5 max-w-full py-18 text-stone-950 md:px-12 md:py-26 overflow-x-hidden">
-            <div className="mx-auto max-w-7xl">
+        <section className="min-h-screen w-full max-w-full overflow-x-hidden px-4 py-16 text-stone-950 sm:px-5 md:px-12 md:py-26">
+            <div className="mx-auto w-full max-w-7xl min-w-0">
+
                 <header className="mb-12 border-b border-stone-200 pb-10">
-                    <p className="mb-4 text-xs uppercase tracking-[0.28em] text-stone-500">The edit</p>
-                    <h1 className="font-serif text-5xl leading-none md:text-7xl">Shopping Bag</h1>
+                    <p className="mb-4 text-xs uppercase tracking-[0.28em] text-stone-500">
+                        The edit
+                    </p>
+
+                    <h1 className="font-serif text-5xl leading-none md:text-7xl">
+                        Shopping Bag
+                    </h1>
+
                     <p className="mt-5 max-w-md text-sm leading-6 text-stone-500">
                         Review your selected pieces before checkout.
                     </p>
                 </header>
 
-                <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_340px] max-w-full">
-                    <div className="min-w-full">
-                        <div className="divide-y divide-stone-200 border border-stone-200">
+                <div className="grid w-full min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12">
+
+                    {/* Cart Items */}
+                    <div className="w-full min-w-0">
+
+                        <div className="w-full min-w-0 divide-y divide-stone-200 border border-stone-200">
+
                             {items.map((item, index) => {
-                                const discountedPrice = getPriceAfterDiscount(item.price, item.Discount);
+                                const discountedPrice = getPriceAfterDiscount(
+                                    item.price,
+                                    item.Discount
+                                );
+
                                 return (
-                                    <article key={`${item.name}-${index}`} className="flex items-center gap-5 px-4 py-8 md:gap-8 md:px-7">
-                                        <div className="relative h-28 w-24 flex-none overflow-hidden border border-stone-200 bg-stone-50 md:h-36 md:w-28">
+                                    <article
+                                        key={`${item.name}-${index}`}
+                                        className="flex w-full min-w-0 items-start gap-3 px-3 py-6 sm:gap-5 sm:px-4 md:items-center md:gap-8 md:px-7 md:py-8"
+                                    >
+
+                                        {/* Product Image */}
+                                        <div className="relative h-24 w-20 flex-none overflow-hidden border border-stone-200 bg-stone-50 sm:h-28 sm:w-24 md:h-36 md:w-28">
                                             <Image
                                                 src={item.img}
                                                 alt={item.name}
                                                 fill
-                                                sizes="112px"
+                                                sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, 112px"
                                                 className="object-cover transition duration-700 hover:scale-105"
-                                                style={{ objectPosition: item.position }}
+                                                style={{
+                                                    objectPosition: item.position
+                                                }}
                                             />
                                         </div>
 
+                                        {/* Product Info */}
                                         <div className="min-w-0 flex-1">
-                                            <div className="flex flex-wrap items-start justify-between gap-4">
+
+                                            <div className="flex min-w-0 flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+
                                                 <div className="min-w-0">
-                                                    <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-stone-500">{item.category}</p>
-                                                    <h2 className="font-medium text-stone-950 md:text-lg">{item.name}</h2>
+                                                    <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-stone-500">
+                                                        {item.category}
+                                                    </p>
+
+                                                    <h2 className="break-words font-medium text-stone-950 md:text-lg">
+                                                        {item.name}
+                                                    </h2>
+
                                                     <p className="mt-2 text-sm text-stone-500">
                                                         ${discountedPrice.toFixed(2)} each
                                                     </p>
                                                 </div>
 
-                                                <div className="flex flex-col items-end gap-3">
+                                                {/* Quantity + Remove */}
+                                                <div className="flex shrink-0 flex-col items-start gap-3 sm:items-end">
+
                                                     <div className="flex items-center border border-stone-300">
+
                                                         <button
                                                             type="button"
                                                             aria-label="Decrease quantity"
                                                             disabled={Number(item.countincart) <= 1}
-                                                            onClick={() => updateQuantity('minus', index)}
+                                                            onClick={() =>
+                                                                updateQuantity("minus", index)
+                                                            }
                                                             className="flex h-10 w-10 items-center justify-center text-stone-700 transition hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-45"
                                                         >
-                                                            <Minus size={14} strokeWidth={1.5} />
+                                                            <Minus
+                                                                size={14}
+                                                                strokeWidth={1.5}
+                                                            />
                                                         </button>
+
                                                         <span className="flex h-10 min-w-12 items-center justify-center border-x border-stone-300 px-4 text-sm text-stone-950">
                                                             {item.countincart}
                                                         </span>
+
                                                         <button
                                                             type="button"
                                                             aria-label="Increase quantity"
-                                                            onClick={() => updateQuantity('plus', index)}
+                                                            onClick={() =>
+                                                                updateQuantity("plus", index)
+                                                            }
                                                             className="flex h-10 w-10 items-center justify-center text-stone-700 transition hover:bg-stone-100"
                                                         >
-                                                            <Plus size={14} strokeWidth={1.5} />
+                                                            <Plus
+                                                                size={14}
+                                                                strokeWidth={1.5}
+                                                            />
                                                         </button>
+
                                                     </div>
 
                                                     <button
@@ -149,15 +196,24 @@ export default function CartPage() {
                                                         onClick={() => removeItem(index)}
                                                         className="flex items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-stone-500 transition hover:text-stone-950"
                                                     >
-                                                        <Trash2 size={14} strokeWidth={1.2} />
+                                                        <Trash2
+                                                            size={14}
+                                                            strokeWidth={1.2}
+                                                        />
+
                                                         Remove
                                                     </button>
+
                                                 </div>
+
                                             </div>
+
                                         </div>
+
                                     </article>
                                 );
                             })}
+
                         </div>
 
                         <div className="mt-8 border-t border-stone-200 pt-4">
@@ -165,80 +221,134 @@ export default function CartPage() {
                                 Free shipping on orders over $100
                             </p>
                         </div>
+
                     </div>
 
-                    <aside className="lg:sticky lg:top-24 lg:h-fit">
-                        <div className="border border-stone-200 bg-white p-8">
+                    {/* Order Summary */}
+                    <aside className="w-full min-w-0 md:sticky md:top-24 lg:h-fit">
+
+                        <div className="border border-stone-200 bg-white p-5 sm:p-6 md:p-8">
+
                             <div className="mb-8">
-                                <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-stone-500">Order Summary</p>
+                                <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-stone-500">
+                                    Order Summary
+                                </p>
                             </div>
 
                             <div className="space-y-5 text-sm">
-                                <div className="flex items-center justify-between gap-4">
-                                    <span className="text-stone-500">Subtotal</span>
-                                    <span className="font-medium text-stone-950">${subtotal.toFixed(2)}</span>
-                                </div>
 
-                                <div className="flex items-center justify-between gap-4 border-t border-stone-200 pt-5">
-                                    <span className="text-stone-500">Shipping</span>
+                                <div className="flex items-center justify-between gap-4">
+                                    <span className="text-stone-500">
+                                        Subtotal
+                                    </span>
+
                                     <span className="font-medium text-stone-950">
-                                        {shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}
+                                        ${subtotal.toFixed(2)}
                                     </span>
                                 </div>
 
                                 <div className="flex items-center justify-between gap-4 border-t border-stone-200 pt-5">
-                                    <span className="text-stone-500">Total</span>
-                                    <span className="font-medium text-stone-950">${total.toFixed(2)}</span>
+                                    <span className="text-stone-500">
+                                        Shipping
+                                    </span>
+
+                                    <span className="font-medium text-stone-950">
+                                        {shipping === 0
+                                            ? "Free"
+                                            : `$${shipping.toFixed(2)}`}
+                                    </span>
                                 </div>
+
+                                <div className="flex items-center justify-between gap-4 border-t border-stone-200 pt-5">
+                                    <span className="text-stone-500">
+                                        Total
+                                    </span>
+
+                                    <span className="font-medium text-stone-950">
+                                        ${total.toFixed(2)}
+                                    </span>
+                                </div>
+
                             </div>
 
+                            {/* Checkout */}
                             <div className="mt-8 space-y-3">
+
                                 <Link
                                     href="/checkout"
-                                    className="flex min-h-12 w-full items-center justify-center border border-stone-950 bg-stone-950 px-5 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-stone-950 disabled:cursor-not-allowed disabled:bg-stone-200 disabled:text-stone-500"
+                                    className="flex min-h-12 w-full items-center justify-center border border-stone-950 bg-stone-950 px-4 text-center text-[10px] font-medium uppercase tracking-[0.15em] text-white transition hover:bg-white hover:text-stone-950 sm:px-5 sm:text-[11px] sm:tracking-[0.2em]"
                                 >
-                                    <Lock size={14} strokeWidth={1.5} className="mr-2" />
+                                    <Lock
+                                        size={14}
+                                        strokeWidth={1.5}
+                                        className="mr-2 shrink-0"
+                                    />
+
                                     Proceed to Checkout
                                 </Link>
 
                                 <button
                                     type="button"
-                                    className="flex min-h-12 w-full items-center justify-center border border-stone-300 bg-white px-5 text-[11px] font-medium uppercase tracking-[0.2em] text-stone-950 transition hover:border-stone-950"
+                                    className="flex min-h-12 w-full items-center justify-center border border-stone-300 bg-white px-4 text-[10px] font-medium uppercase tracking-[0.15em] text-stone-950 transition hover:border-stone-950 sm:px-5 sm:text-[11px] sm:tracking-[0.2em]"
                                 >
                                     Apple Pay
                                 </button>
+
                             </div>
 
+                            {/* Secure Checkout */}
                             <div className="mt-8 border-t border-stone-200 pt-5">
-                                <p className="text-[10px] uppercase tracking-[0.18em] text-stone-500">Secure Checkout</p>
+
+                                <p className="text-[10px] uppercase tracking-[0.18em] text-stone-500">
+                                    Secure Checkout
+                                </p>
+
                                 <div className="mt-4 flex items-center gap-2 text-xs text-stone-500">
-                                    <Lock size={14} strokeWidth={1.4} />
+                                    <Lock
+                                        size={14}
+                                        strokeWidth={1.4}
+                                    />
+
                                     SSL protected payment
                                 </div>
+
                             </div>
 
+                            {/* Promo Code */}
                             <div className="mt-8 border-t border-stone-200 pt-6">
-                                <div className="flex items-center gap-2">
+
+                                <div className="flex w-full min-w-0 items-center gap-2">
+
                                     <input
                                         type="text"
                                         value={promoCode}
-                                        onChange={(event) => setPromoCode(event.target.value)}
+                                        onChange={(event) =>
+                                            setPromoCode(event.target.value)
+                                        }
                                         placeholder="Promo code"
-                                        className="min-h-11 flex-1 border border-stone-300 bg-white px-4 text-sm text-stone-950 outline-none placeholder:text-stone-400 focus:border-stone-950"
+                                        className="min-h-11 min-w-0 flex-1 border border-stone-300 bg-white px-3 text-sm text-stone-950 outline-none placeholder:text-stone-400 focus:border-stone-950 sm:px-4"
                                     />
+
                                     <button
                                         type="button"
-                                        className="min-h-11 border border-stone-950 bg-white px-5 text-[10px] font-medium uppercase tracking-[0.18em] text-stone-950 transition hover:bg-stone-950 hover:text-white"
+                                        className="min-h-11 shrink-0 border border-stone-950 bg-white px-3 text-[9px] font-medium uppercase tracking-[0.14em] text-stone-950 transition hover:bg-stone-950 hover:text-white sm:px-5 sm:text-[10px] sm:tracking-[0.18em]"
                                     >
                                         Apply
                                     </button>
+
                                 </div>
+
                             </div>
+
                         </div>
+
                     </aside>
+
                 </div>
+
             </div>
         </section>
+
         </>
     );
 }

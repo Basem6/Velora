@@ -27,7 +27,11 @@ export default function Nav() {
   const isActive = (path: string) => pathname === path || (path !== "/" && pathname.startsWith(path));
 
   useEffect(() => {
+    if(mobileOpen){
+      document.body.classList.add("noscroll")
+    }
     if (!mobileOpen) {
+      document.body.classList.remove("noscroll")
       return undefined;
     }
 
@@ -44,6 +48,7 @@ export default function Nav() {
     return () => {
       document.removeEventListener("mousedown", handleOutsidePointer);
       document.removeEventListener("touchstart", handleOutsidePointer);
+      document.body.classList.remove("noscroll");
     };
   }, [mobileOpen]);
 
