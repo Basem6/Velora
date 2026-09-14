@@ -82,7 +82,7 @@ export default function CartPage() {
             onConfirm={confirmRemove}
         />
 
-        <section className="min-h-screen w-full max-w-full overflow-x-hidden px-4 py-16 text-stone-950 sm:px-5 md:px-12 md:py-26">
+        <section className="min-h-screen w-full max-w-full  px-4 py-16 text-stone-950 sm:px-5 md:px-12 md:py-26">
             <div className="mx-auto w-full max-w-7xl min-w-0">
 
                 <header className="mb-12 border-b border-stone-200 pb-10">
@@ -225,7 +225,7 @@ export default function CartPage() {
                     </div>
 
                     {/* Order Summary */}
-                    <aside className="w-full min-w-0 md:sticky md:top-24 lg:h-fit">
+                    <aside className="w-full min-w-0 self-start lg:sticky lg:top-24 h-fit">
 
                         <div className="border border-stone-200 bg-white p-5 sm:p-6 md:p-8">
 

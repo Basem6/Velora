@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import { Heart, ShoppingBag, Plus } from 'lucide-react';
 import { CartContext, ToastContext, WishlistContext } from '@/app/context/CartContext';
+import Link from 'next/link';
 
 export default function ProductDetailClient({ product }) {
 const { dispatch } = useContext(CartContext) || { dispatch: () => {} };
@@ -40,7 +41,14 @@ return (
         <article className="flex flex-col justify-center">
             <div className="mb-6 flex items-center justify-between border-b border-stone-200 pb-5">
             <span className="text-[11px] uppercase tracking-[0.22em] text-stone-500">{product.category}</span>
-            
+            <button
+                type="button"
+                aria-label={isInWishlist(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+                onClick={handleWishlist}
+                className={`flex size-10 items-center justify-center border transition ${isInWishlist(product.id) ? 'border-stone-950 bg-stone-950 text-white' : 'border-stone-200 text-stone-600 hover:border-stone-950 hover:text-stone-950'}`}
+            >
+                <Heart size={16} strokeWidth={1.2} fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
+                </button>
             </div>
 
             <div className="space-y-6">
@@ -71,6 +79,7 @@ return (
                     {size}
                     </button>
                 ))}
+                
                 </div>
             </div>
 
@@ -79,24 +88,18 @@ return (
                 <button
                 type="button"
                 onClick={handleAddToCart}
-                className="inline-flex min-h-12 items-center justify-center border border-stone-950 bg-stone-950 px-8 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-stone-950"
+                className="inline-flex min-h-12 items-center justify-center border border-stone-950 bg-stone-950 px-5 md:px-8 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-stone-950"
                 >
                 <ShoppingBag size={15} strokeWidth={1.4} className="mr-2" />
                 Add to Bag
                 </button>
-                <button type="button" className="inline-flex min-h-12 items-center justify-center border border-stone-300 px-8 text-[11px] font-medium uppercase tracking-[0.2em] text-stone-950 transition hover:border-stone-950">
+                <Link href={"/checkout"}>
+                <button type="button" onClick={()=>{dispatch({ type: 'addItem', payload: { ...product, countincart: 1 } }); }}   className="inline-flex min-h-12 items-center justify-center border border-stone-300 px-5 md:px-8 text-[11px] font-medium uppercase tracking-[0.2em] text-stone-950 transition hover:border-stone-950">
                 <Plus size={14} strokeWidth={1.4} className="mr-2" />
                 Quick Add
                 </button>
+                </Link>
                 </div>
-                <button
-                type="button"
-                aria-label={isInWishlist(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
-                onClick={handleWishlist}
-                className={`flex h-10 w-10 items-center justify-center border transition ${isInWishlist(product.id) ? 'border-stone-950 bg-stone-950 text-white' : 'border-stone-200 text-stone-600 hover:border-stone-950 hover:text-stone-950'}`}
-            >
-                <Heart size={16} strokeWidth={1.2} fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
-                </button>
             </div>
 
             <div className="border-t border-stone-200 pt-6">
