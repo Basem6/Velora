@@ -2,7 +2,7 @@ import Image from "next/image";
 import MainBtn from "../ui/Mainbtn"
 export default function Hero(){
     return (
-        <div className="relative w-full bg-gray-50 min-h-screen max-h-screen overflow-x-hidden">
+        <div className="relative w-full bg-gray-50  min-h-svh overflow-hidden">
                 <main className="w-full relative ">
                     <section className="relative min-h-136.5  md:min-h-116.5 flex items-center justify-center overflow-hidden px-3 md:px-6 w-full max-w-full">
                         <div className="relative z-10 text-center max-w-4xl">
@@ -35,19 +35,19 @@ export default function Hero(){
                         </div>
                     </section>
                 </main>
-                {/* <div className="absolute bottom-0 left-0  min-w-full">
-                <div className="flex justify-center min-w-full">
+                <div className="absolute bottom-0 left-0  w-full">
+                <div className="flex justify-center w-full">
                     <Image
                     src="/hero.webp"
                     alt="Models wearing the latest collection"
                     width={1130}
-                    height={200}
+                    height={500}
                     preload
                     fetchPriority="high"
                     className="object-contain"
                     />
                 </div>
-                </div> */}
+                </div>
         </div>
     )
 }

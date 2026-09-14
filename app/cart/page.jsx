@@ -82,7 +82,7 @@ export default function CartPage() {
             onConfirm={confirmRemove}
         />
 
-        <section className="min-h-screen px-5 py-18 text-stone-950 md:px-12 md:py-26">
+        <section className="min-h-screen px-5 max-w-full py-18 text-stone-950 md:px-12 md:py-26 overflow-x-hidden">
             <div className="mx-auto max-w-7xl">
                 <header className="mb-12 border-b border-stone-200 pb-10">
                     <p className="mb-4 text-xs uppercase tracking-[0.28em] text-stone-500">The edit</p>
@@ -92,8 +92,8 @@ export default function CartPage() {
                     </p>
                 </header>
 
-                <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_340px]">
-                    <div className="min-w-0">
+                <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_340px] max-w-full">
+                    <div className="min-w-full">
                         <div className="divide-y divide-stone-200 border border-stone-200">
                             {items.map((item, index) => {
                                 const discountedPrice = getPriceAfterDiscount(item.price, item.Discount);
