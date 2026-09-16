@@ -145,27 +145,27 @@ export default function HomeFashionSections() {
                     <span className="offer-card-label">{campaign.label}</span>
 
                     {campaign.images.map((image, imageIndex) => (
-  <div
-    key={`${campaign.id}-${image.alt}`}
-    className={`offer-image-frame ${image.className}`}
-  >
-    <Image
-      src={image.src}
-      alt={image.alt}
-      fill
-      sizes="
-        (max-width: 640px) 45vw,
-        (max-width: 1100px) 30vw,
-        280px
-      "
-      className={`offer-image ${
-        imageIndex === 0
-          ? "offer-image-main"
-          : "offer-image-secondary"
-      }`}
-      loading="lazy"
-    />
-  </div>
+            <div
+              key={`${campaign.id}-${image.alt}`}
+              className={`offer-image-frame ${image.className}`}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="
+                  (max-width: 640px) 45vw,
+                  (max-width: 1100px) 30vw,
+                  280px
+                "
+                className={`offer-image ${
+                  imageIndex === 0
+                    ? "offer-image-main"
+                    : "offer-image-secondary"
+                }`}
+                loading="lazy"
+              />
+            </div>
 ))}
 
                     <span className="offer-card-index">{campaign.kicker}</span>

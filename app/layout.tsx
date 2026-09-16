@@ -1,22 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Nav from "@/app/components/landing/Nav"
-import Footer from "@/app/components/landing/Footer"
-import { CartProvider, WishlistProvider, ToastProvider } from "@/app/context/CartContext";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import Nav from "./components/landing/Nav";
+import Footer from "@/app/components/landing/Footer"
+import Providers from "./context/Providers";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://velora.example.com"),
+  metadataBase: new URL("https://velora-dun-eta.vercel.app"),
   title: {
     default: "VELORA | Modern Clothing, Bags & Accessories",
     template: "%s | VELORA",
@@ -56,7 +45,7 @@ export const metadata: Metadata = {
     title: "VELORA | Modern Clothing, Bags & Accessories",
     description:
       "Discover elevated clothing, bags, shoes, and accessories from VELORA.",
-    url: "https://velora.example.com",
+    url: "https://velora-dun-eta.vercel.app",
     siteName: "VELORA",
     locale: "en_US",
     type: "website",
@@ -81,23 +70,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="en" data-scroll-behavior="smooth" className="h-full antialiased">
       <body className="min-h-screen flex flex-col">
-        <ToastProvider>
-          <CartProvider>
-            <WishlistProvider>
-              <Nav />
-              <main className="">
-                {children}
-              </main>
-              <Footer />
-            </WishlistProvider>
-          </CartProvider>
-        </ToastProvider>
-      </body> 
+        <Providers>
+          <Nav />
+          {children}
+          <Footer />
+        </Providers>
+      </body>
     </html>
   );
 }

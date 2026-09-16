@@ -25,6 +25,7 @@ export default function BestSeller(){
                                         src={`${product.image}`}
                                         alt={product.name}
                                         fill
+                                        loading="lazy"
                                         sizes="(min-width: 768px) 25vw, 50vw"
                                         className="object-cover grayscale-15 transition duration-700 group-hover:scale-105"
                                         style={{ objectPosition: product.position }}

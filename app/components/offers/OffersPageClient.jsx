@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 import { ArrowRight, ShoppingBag } from "lucide-react";
-import { CartContext, WishlistContext, getPriceAfterDiscount } from "@/app/context/CartContext";
+import { CartContext,  getPriceAfterDiscount } from "@/app/context/CartContext";
+import { WishlistContext } from "@/app/context/WishlistContext";
 import { products } from "@/app/data/products";
 
 const campaignDeals = [

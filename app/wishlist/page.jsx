@@ -4,7 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useContext } from 'react';
 import { Heart, ShoppingBag, X } from 'lucide-react';
-import { WishlistContext, ToastContext } from '@/app/context/CartContext';
+import { WishlistContext } from '@/app/context/WishlistContext';
+import { ToastContext } from '@/app/context/ToastContext';
 
 export default function WishlistPage() {
   const { items, removeItem } = useContext(WishlistContext) || { items: [], removeItem: () => {} };

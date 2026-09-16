@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/products/[category]/page.jsx"  ],
+, "app/products/[category]/page.jsx", "app/context/ToastContext.jsx", "app/context/Providers.jsx", "app/context/WishlistContext.jsx"  ],
   "exclude": ["node_modules"]
 }

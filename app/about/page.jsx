@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 export default function AboutPage() {
   return (
     <section className="min-h-screen bg-[#f8f7f3] px-5 py-24 text-stone-950 md:px-12 md:py-28">

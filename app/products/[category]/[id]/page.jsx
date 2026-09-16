@@ -48,7 +48,6 @@ export async function generateMetadata({ params }) {
 export default async function ProductDetailPage({ params }) {
   const { category, id } = await params;
   const product = findProduct(category, id);
-  console.log(product)
 
   if (!product) {
     return (

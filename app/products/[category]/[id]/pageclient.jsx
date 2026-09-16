@@ -1,10 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useContext } from 'react';
+
 import { Heart, ShoppingBag, Plus } from 'lucide-react';
-import { CartContext, ToastContext, WishlistContext } from '@/app/context/CartContext';
+import { CartContext } from '@/app/context/CartContext';
+import {  ToastContext } from '@/app/context/ToastContext';
+import {  WishlistContext } from '@/app/context/WishlistContext';
 import Link from 'next/link';
+import { useContext } from 'react';
 
 export default function ProductDetailClient({ product }) {
 const { dispatch } = useContext(CartContext) || { dispatch: () => {} };
@@ -12,6 +15,7 @@ const { addItem: addWishlistItem, isInWishlist } = useContext(WishlistContext) |
 const { showToast } = useContext(ToastContext) || { showToast: () => {} };
 
 const handleAddToCart = () => {
+    console.log("ADDDED")
     dispatch({ type: 'addItem', payload: { ...product, countincart: 1 } });
     showToast('Added to bag');
 };

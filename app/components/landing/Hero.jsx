@@ -35,18 +35,30 @@ export default function Hero(){
                         </div>
                     </section>
                 </main>
-                <div className="absolute bottom-0 left-0  w-full">
-                <div className="flex justify-center w-full">
-                    <Image
-                    src="/hero.webp"
-                    alt="Models wearing the latest collection"
-                    width={1130}
-                    height={500}
-                    preload
-                    fetchPriority="high"
-                    className="object-contain"
-                    />
-                </div>
+                <div className="absolute bottom-0 left-0 w-full">
+                    <div className="flex justify-center w-full">
+                        {/* Desktop */}
+                        <Image
+                        src="/herodesktop.webp"
+                        alt="Models wearing the latest collection"
+                        width={1200}
+                        height={400}
+                        preload
+                        fetchPriority="high"
+                        sizes="(min-width: 768px) 1200px, 0px"
+                        className="hidden h-auto w-full max-w-[1200px] object-contain md:block"
+                        />
+
+                        {/* Mobile */}
+                        <Image
+                        src="/heromobile.webp"
+                        alt=""
+                        width={500}
+                        height={200}
+                        sizes="100vw"
+                        className="block h-auto w-full object-contain md:hidden"
+                        />
+                    </div>
                 </div>
         </div>
     )
