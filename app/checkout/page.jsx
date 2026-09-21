@@ -214,7 +214,7 @@ const handlePlaceOrder = async () => {
     console.log("ORDER PAYLOAD:", orderPayload);
 
     const orderResponse = await fetch(
-      "http://localhost:5000/api/orders",
+      "https://backend-velora-production.up.railway.app/api/orders",
       {
         method: "POST",
         headers: {
@@ -261,7 +261,7 @@ const handlePlaceOrder = async () => {
     // =========================
 
     const paymentResponse = await fetch(
-      "http://localhost:5000/api/payment/pay",
+      "https://backend-velora-production.up.railway.app/api/payment/pay",
       {
         method: "POST",
         headers: {

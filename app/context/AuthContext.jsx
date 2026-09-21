@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
 
         // Create new guest session
         const response = await fetch(
-          "http://localhost:5000/api/auth/guest",
+          "https://backend-velora-production.up.railway.app/api/auth/guest",
           {
             method: "POST",
             headers: {
