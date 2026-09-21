@@ -161,7 +161,10 @@ const handlePlaceOrder = async () => {
   if (loading) return;
 
   if (!token) {
-    showToast("Please wait while your session is being created.", "error");
+    showToast(
+      "Please wait while your session is being created.",
+      "error"
+    );
     return;
   }
 
@@ -183,10 +186,7 @@ const handlePlaceOrder = async () => {
 
     const orderPayload = {
       products: items.map((item) => ({
-        // IMPORTANT:
-        // This must be the MongoDB _id
         product: item._id,
-
         name: item.name,
 
         price: getPriceAfterDiscount(
@@ -214,7 +214,7 @@ const handlePlaceOrder = async () => {
     console.log("ORDER PAYLOAD:", orderPayload);
 
     const orderResponse = await fetch(
-      "https://backend-velora-production.up.railway.app/api/orders",
+      "http://localhost:5000/api/orders",
       {
         method: "POST",
         headers: {
@@ -253,12 +253,6 @@ const handlePlaceOrder = async () => {
         "success"
       );
 
-      // optional:
-      // dispatch({ type: "clearCart" });
-
-      // redirect to success page
-      // router.push(`/order-success?orderId=${orderId}`);
-
       return;
     }
 
@@ -267,7 +261,7 @@ const handlePlaceOrder = async () => {
     // =========================
 
     const paymentResponse = await fetch(
-      "https://backend-velora-production.up.railway.app/api/payment/pay",
+      "http://localhost:5000/api/payment/pay",
       {
         method: "POST",
         headers: {
@@ -290,21 +284,32 @@ const handlePlaceOrder = async () => {
           "Failed to initiate payment"
       );
     }
+    const clientSecret =
+  paymentData?.data?.clientSecret;
 
-    const iframeUrl =
-      paymentData?.data?.iframeUrl;
+if (!clientSecret) {
+  throw new Error(
+    "Paymob client secret was not returned"
+  );
+}
 
-    if (!iframeUrl) {
-      throw new Error(
-        "Paymob iframe URL was not returned"
-      );
-    }
+console.log(
+  "PAYMOB CLIENT SECRET RECEIVED"
+);
 
-    // =========================
-    // 4. Redirect to Paymob
-    // =========================
+// =========================
+// Paymob Unified Checkout
+// =========================
 
-    window.location.href = iframeUrl;
+const checkoutUrl =
+  `https://accept.paymob.com/unifiedcheckout/?publicKey=${encodeURIComponent(
+    process.env.NEXT_PUBLIC_PAYMOB_PUBLIC_KEY
+  )}&clientSecret=${encodeURIComponent(
+    clientSecret
+  )}`;
+
+window.location.href = checkoutUrl;
+    
 
   } catch (error) {
     console.error(
