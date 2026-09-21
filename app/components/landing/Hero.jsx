@@ -1,7 +1,7 @@
 import Image from "next/image";
 import MainBtn from "../ui/Mainbtn"
 export default function Hero(){
-    return (
+return (
         <div className="relative w-full bg-gray-50  min-h-svh overflow-hidden">
                 <main className="w-full relative ">
                     <section className="relative min-h-136.5  md:min-h-116.5 flex items-center justify-center overflow-hidden px-3 md:px-6 w-full max-w-full">

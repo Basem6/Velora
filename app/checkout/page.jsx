@@ -3,27 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useMemo, useState } from "react";
-import {
-ArrowLeft,
-Check,
-CreditCard,
-Lock,
-MapPin,
-Minus,
-PackageCheck,
-Plus,
-ShoppingBag,
-} from "lucide-react";
+import {ArrowLeft,Check,CreditCard,Lock,MapPin,Minus,PackageCheck,Plus,ShoppingBag,} from "lucide-react";
 
-import {
-CartContext,
-getPriceAfterDiscount,
-} from "@/app/context/CartContext";
+import {CartContext,getPriceAfterDiscount,} from "@/app/context/CartContext";
 
 import { ToastContext } from "@/app/context/ToastContext";
 import ConfirmDialog from "@/app/components/ui/ConfirmDialog";
-
+import { useAuth } from "@/app/context/AuthContext";
 export default function CheckoutPage() {
+const { token} = useAuth();
 const { state, dispatch } = useContext(CartContext) || {
 state: { items: [] },
 dispatch: () => {},
@@ -33,11 +21,6 @@ const { showToast } = useContext(ToastContext) || {
 showToast: () => {},
 };
 
-/*
-|--------------------------------------------------------------------------
-| Cart Items
-|--------------------------------------------------------------------------
-*/
 
 const items = useMemo(() => {
 return Array.isArray(state.items)
@@ -46,12 +29,6 @@ return Array.isArray(state.items)
     )
 : [];
 }, [state.items]);
-
-/*
-|--------------------------------------------------------------------------
-| Prices
-|--------------------------------------------------------------------------
-*/
 
 const subtotal = useMemo(() => {
 return items.reduce((sum, item) => {
@@ -77,12 +54,6 @@ const tax = subtotal * 0.08;
 
 const total = subtotal + shipping + tax;
 
-/*
-|--------------------------------------------------------------------------
-| State
-|--------------------------------------------------------------------------
-*/
-
 const [promoCode, setPromoCode] = useState("");
 
 const [paymentMethod, setPaymentMethod] =
@@ -103,12 +74,7 @@ city: "",
 postalCode: "",
 });
 
-/*
-|--------------------------------------------------------------------------
-| Form Change
-|--------------------------------------------------------------------------
-*/
-
+console.log(items)
 const handleInputChange = (event) => {
 const { name, value } = event.target;
 
@@ -117,12 +83,6 @@ setFormData((previous) => ({
 [name]: value,
 }));
 };
-
-/*
-|--------------------------------------------------------------------------
-| Quantity
-|--------------------------------------------------------------------------
-*/
 
 const updateQuantity = (type, index) => {
 if (type === "plus") {
@@ -140,12 +100,6 @@ dispatch({
 }
 };
 
-/*
-|--------------------------------------------------------------------------
-| Remove Item
-|--------------------------------------------------------------------------
-*/
-
 const removeItem = (index) => {
 setRemoveIndex(index);
 };
@@ -161,14 +115,9 @@ dispatch({
 setRemoveIndex(null);
 };
 
-/*
-|--------------------------------------------------------------------------
-| Validation
-|--------------------------------------------------------------------------
-*/
-
 const validateForm = () => {
 const requiredFields = [
+
 "firstName",
 "lastName",
 "email",
@@ -207,181 +156,172 @@ return false;
 return true;
 };
 
-/*
-|--------------------------------------------------------------------------
-| Paymob Checkout
-|--------------------------------------------------------------------------
-*/
 
 const handlePlaceOrder = async () => {
-if (loading) return;
+  if (loading) return;
 
-if (!validateForm()) {
-return;
-}
+  if (!token) {
+    showToast("Please wait while your session is being created.", "error");
+    return;
+  }
 
-/*
-|--------------------------------------------------------------------------
-| Cash On Delivery
-|--------------------------------------------------------------------------
-*/
+  if (!validateForm()) {
+    return;
+  }
 
-if (paymentMethod === "cash") {
-showToast(
-    "Cash on Delivery selected.",
-    "success"
-);
+  if (items.length === 0) {
+    showToast("Your cart is empty.", "error");
+    return;
+  }
 
-// هنا تقدر بعدين تعمل API لإنشاء Order في قاعدة البيانات.
-return;
-}
+  try {
+    setLoading(true);
 
-/*
-|--------------------------------------------------------------------------
-| Paymob
-|--------------------------------------------------------------------------
-*/
+    // =========================
+    // 1. Create Order
+    // =========================
 
-try {
-setLoading(true);
+    const orderPayload = {
+      products: items.map((item) => ({
+        // IMPORTANT:
+        // This must be the MongoDB _id
+        product: item._id,
 
-/*
-Paymob amount is in the smallest currency unit.
-Example:
-100 EGP = 10000 cents
-*/
+        name: item.name,
 
-const amount = Math.round(total * 100);
+        price: getPriceAfterDiscount(
+          item.price,
+          item.Discount || 0
+        ),
 
-const orderReference =
-    `VELORA-${Date.now()}`;
+        quantity: Number(item.countincart || 1),
+      })),
 
-const response = await fetch(
-    "/api/paymob/create-intention",
-    {
+      shippingAddress: {
+        fullName: `${formData.firstName} ${formData.lastName}`,
+        address: formData.street,
+        city: formData.city,
+        country: "Egypt",
+        postalCode: formData.postalCode,
+        phone: formData.phone,
+      },
+
+      totalPrice: total,
+
+      paymentMethod,
+    };
+
+    console.log("ORDER PAYLOAD:", orderPayload);
+
+    const orderResponse = await fetch(
+      "http://localhost:5000/api/orders",
+      {
         method: "POST",
         headers: {
-            "Content-Type":
-                "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify(orderPayload),
+      }
+    );
 
-        body: JSON.stringify({
-            amount,
+    const orderData = await orderResponse.json();
 
-            currency: "EGP",
+    console.log("ORDER RESPONSE:", orderData);
 
-            itemName:
-                items.length === 1
-                    ? items[0].name
-                    : `VELORA Order - ${items.length} items`,
-
-            description:
-                "VELORA online order",
-
-            firstName:
-                formData.firstName,
-
-            lastName:
-                formData.lastName,
-
-            email:
-                formData.email,
-
-            phone:
-                formData.phone,
-
-            street:
-                formData.street,
-
-            city:
-                formData.city,
-
-            postalCode:
-                formData.postalCode,
-
-            orderId:
-                orderReference,
-
-            items: items.map(
-                (item) => ({
-                    name:
-                        item.name,
-
-                    amount: Math.round(
-                        getPriceAfterDiscount(
-                            item.price,
-                            item.Discount
-                        ) *
-                            Number(
-                                item.countincart ||
-                                    1
-                            ) *
-                            100
-                    ),
-
-                    quantity:
-                        Number(
-                            item.countincart ||
-                                1
-                        ),
-                })
-            ),
-        }),
+    if (!orderResponse.ok) {
+      throw new Error(
+        orderData?.message || "Failed to create order"
+      );
     }
-);
 
-const data =
-    await response.json();
+    const orderId = orderData.orderId;
 
-if (!response.ok) {
-    throw new Error(
-        data?.details ||
-            data?.error ||
-            "Failed to create Paymob intention."
+    if (!orderId) {
+      throw new Error("Order ID was not returned");
+    }
+
+    console.log("ORDER CREATED:", orderId);
+
+    // =========================
+    // 2. Cash On Delivery
+    // =========================
+
+    if (paymentMethod === "cash") {
+      showToast(
+        "Your order has been placed successfully.",
+        "success"
+      );
+
+      // optional:
+      // dispatch({ type: "clearCart" });
+
+      // redirect to success page
+      // router.push(`/order-success?orderId=${orderId}`);
+
+      return;
+    }
+
+    // =========================
+    // 3. Paymob
+    // =========================
+
+    const paymentResponse = await fetch(
+      "http://localhost:5000/api/payment/pay",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          orderId,
+        }),
+      }
     );
-}
 
-if (!data?.clientSecret) {
-    throw new Error(
-        "Paymob did not return a client secret."
+    const paymentData = await paymentResponse.json();
+
+    console.log("PAYMENT RESPONSE:", paymentData);
+
+    if (!paymentResponse.ok) {
+      throw new Error(
+        paymentData?.message ||
+          "Failed to initiate payment"
+      );
+    }
+
+    const iframeUrl =
+      paymentData?.data?.iframeUrl;
+
+    if (!iframeUrl) {
+      throw new Error(
+        "Paymob iframe URL was not returned"
+      );
+    }
+
+    // =========================
+    // 4. Redirect to Paymob
+    // =========================
+
+    window.location.href = iframeUrl;
+
+  } catch (error) {
+    console.error(
+      "CHECKOUT ERROR:",
+      error
     );
-}
 
-/*
-|--------------------------------------------------------------------------
-| Redirect to Paymob Unified Checkout
-|--------------------------------------------------------------------------
-*/
-
-const checkoutUrl =
-    `https://accept.paymob.com/unifiedcheckout/` +
-    `?client_secret=${encodeURIComponent(
-        data.clientSecret
-    )}`;
-
-window.location.href =
-    checkoutUrl;
-} catch (error) {
-console.error(
-    "PAYMOB CHECKOUT ERROR:",
-    error
-);
-
-showToast(
-    error?.message ||
-        "Unable to start payment. Please try again.",
-    "error"
-);
-
-setLoading(false);
-}
+    showToast(
+      error?.message ||
+        "Unable to complete checkout.",
+      "error"
+    );
+  } finally {
+    setLoading(false);
+  }
 };
 
-/*
-|--------------------------------------------------------------------------
-| Empty Cart
-|--------------------------------------------------------------------------
-*/
 
 if (!items.length) {
 return (
@@ -419,12 +359,6 @@ return (
 </section>
 );
 }
-
-/*
-|--------------------------------------------------------------------------
-| Page
-|--------------------------------------------------------------------------
-*/
 
 return (
 <>
