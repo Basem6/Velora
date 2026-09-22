@@ -43,8 +43,7 @@ return (
                         alt="Models wearing the latest collection"
                         width={1200}
                         height={400}
-                        preload
-                        fetchPriority="high"
+                        priority
                         sizes="(min-width: 768px) 1200px, 0px"
                         className="hidden h-auto w-full max-w-[1200px] object-contain md:block"
                         />
@@ -55,6 +54,7 @@ return (
                         alt=""
                         width={500}
                         height={200}
+                        priority
                         sizes="100vw"
                         className="block h-auto w-full object-contain md:hidden"
                         />
