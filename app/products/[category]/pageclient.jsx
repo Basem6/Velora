@@ -4,11 +4,9 @@ import { Search, SlidersHorizontal, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 
-const categories = ['Women', 'Men', 'kids'];
 const colors = ['Black', 'Blue', 'Green', 'Neutral'];
 const sizes = ['XS', 'S', 'M', 'L', 'XL'];
-
-function FilterPanel({ selectedCategories, setSelectedCategories, selectedColors, setSelectedColors, selectedSizes, setSelectedSizes, priceRange, setPriceRange, onReset }) {
+function FilterPanel({ selectedCategories, setSelectedCategories, selectedColors, setSelectedColors, selectedSizes, setSelectedSizes, priceRange, setPriceRange, onReset , categories}) {
     const toggleValue = (value, selected, setSelected) => {
         setSelected(selected.includes(value) ? selected.filter((item) => item !== value) : [...selected, value]);
     };
@@ -118,6 +116,16 @@ function Pagination({ currentPage, totalPages, goToPage }) {
 }
 
 export default function CategoryPage({ category , products }) {
+    const categorySubCategories = {
+    clothing: ['Women', 'Men', 'Kids', 'T-shirts',"Pants","Jackets'"],
+    shoes: ['Women', 'Men', 'Kids', 'Sports'],
+    accessories: ['Women', 'Men', 'Bags', 'Watches', 'Glasses']
+    };
+
+    let categories = [];
+    if (category) {
+    categories = categorySubCategories[category.toLowerCase()] || [];
+    }
     const [search, setSearch] = useState('');
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedColors, setSelectedColors] = useState([]);
@@ -230,6 +238,7 @@ export default function CategoryPage({ category , products }) {
                                 priceRange,
                                 setPriceRange: (value) => updateFilter(setPriceRange, value),
                                 onReset: resetFilters,
+                                categories
                             }}
                         />
                     </aside>

@@ -7,24 +7,37 @@ import { CartContext } from '@/app/context/CartContext';
 import {  ToastContext } from '@/app/context/ToastContext';
 import {  WishlistContext } from '@/app/context/WishlistContext';
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 export default function ProductDetailClient({ product }) {
 const { dispatch } = useContext(CartContext) || { dispatch: () => {} };
-const { addItem: addWishlistItem, isInWishlist } = useContext(WishlistContext) || { addItem: () => {}, isInWishlist: () => false };
+const { addItem: addWishlistItem,removeItem, isInWishlist } = useContext(WishlistContext) || { addItem: () => {}, removeItem:()=>{} ,isInWishlist: () => false };
 const { showToast } = useContext(ToastContext) || { showToast: () => {} };
+const [ activeSize , setActiveSize] = useState(0)
 
 const handleAddToCart = () => {
-    console.log("ADDDED")
     dispatch({ type: 'addItem', payload: { ...product, countincart: 1 } });
     showToast('Added to bag');
 };
-
+const handlechoiseSize = (e)=>{
+    if(activeSize===e){
+        return;
+    }
+    setActiveSize(e)
+}
 const handleWishlist = () => {
-    addWishlistItem(product);
-    showToast('Saved to wishlist');
+    const statue = isInWishlist(product.id)
+    if(!statue){
+        addWishlistItem(product);
+        showToast('Saved to wishlist');
+    }
+    else{
+        removeItem(product.id);
+        showToast('Removed from wishlist');
+    }
+    
 };
-
+console.log(product)
 return (
     <section className="min-h-screen px-5 py-18 text-stone-950 md:px-12 md:py-26">
     <div className="mx-auto max-w-7xl">
@@ -52,7 +65,7 @@ return (
                 className={`flex size-10 items-center justify-center border transition ${isInWishlist(product.id) ? 'border-stone-950 bg-stone-950 text-white' : 'border-stone-200 text-stone-600 hover:border-stone-950 hover:text-stone-950'}`}
             >
                 <Heart size={16} strokeWidth={1.2} fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
-                </button>
+            </button>
             </div>
 
             <div className="space-y-6">
@@ -74,11 +87,12 @@ return (
                 <span className="text-[10px] uppercase tracking-[0.2em] text-stone-500">{product.sizes.join(' / ')}</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                {product.sizes.map((size) => (
+                {product.sizes.map((size , ind) => (
                     <button
                     key={size}
                     type="button"
-                    className="min-h-11 min-w-11 border border-stone-300 px-4 text-[11px] uppercase tracking-[0.16em] text-stone-700 transition hover:border-stone-950 hover:text-stone-950"
+                    onClick={(e)=>{handlechoiseSize(ind)}}
+                    className={`min-h-11 min-w-11 border border-stone-300 px-4 text-[11px] uppercase tracking-[0.16em] ${ind===activeSize?"bg-black text-gray-100":"text-stone-700 bg-transparent"}  transition  hover:text-gray-100 hover:bg-black`}
                     >
                     {size}
                     </button>

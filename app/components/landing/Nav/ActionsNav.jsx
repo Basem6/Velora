@@ -10,8 +10,9 @@ const pathname = usePathname();
 const isActive = (path) => pathname === path || (path !== "/" && pathname.startsWith(path));
 const { state } = useContext(CartContext) || { state: { items: [] } };
 const { items: wishlistItems } = useContext(WishlistContext) || { items: [] };
-const cartCount = Array.isArray(state?.items) ? state.items.length : 0;
+const cartCount = state.items.reduce((acc,current)=>acc+current.countincart,0)
 const wishlistCount = Array.isArray(wishlistItems) ? wishlistItems.length : 0;
+console.log(wishlistItems)
 return (
     <div className="flex items-center gap-2 pl-3 md:border-l md:border-stone-300">
             <Link
@@ -43,16 +44,13 @@ return (
                 </span>
                 )}
             </Link>
-            <Link
-                href="/"
-                aria-label="more"
-                className={`relative hidden md:block rounded-full p-2.5 transition hover:bg-stone-100 hover:text-[#a47b4c] ${
-                isActive("/") ? "text-[#a47b4c]" : "text-stone-700"
-                }`}
+            <button
+                aria-label="button"
+                className="relative hidden md:block rounded-full p-2.5 transition hover:bg-stone-100 hover:text-[#a47b4c]"
             >
                 < EllipsisVertical size={23} strokeWidth={0.8} />
                 
-            </Link>
+            </button>
     </div>
 );
 }

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 import { CartContext,  getPriceAfterDiscount } from "@/app/context/CartContext";
-import { WishlistContext } from "@/app/context/WishlistContext";
+import { ToastContext } from "@/app/context/ToastContext";
 import { products } from "@/app/data/products";
 
 const campaignDeals = [
@@ -36,17 +36,15 @@ const campaignDeals = [
 ];
 
 export default function OffersPageClient() {
-const cartContext = useContext(CartContext) || { dispatch: null };
-const wishlistContext = useContext(WishlistContext) || { addItem: null, removeItem: null, isInWishlist: () => false };
+const { showToast } = useContext(ToastContext) || { showToast: () => {} };
+const { dispatch }= useContext(CartContext) || { dispatch: null };
 
-const { dispatch } = cartContext;
 
 const discountedProducts = products.filter((product) => Number(product.Discount) > 0);
 
-const addToCart = (product) => {
-    if (dispatch) {
-    dispatch({ type: "addItem", payload: product });
-    }
+const handleAddToCart = (product) => {
+    dispatch({ type: 'addItem', payload: { ...product, countincart: 1 } });
+    showToast('Added to bag');
 };
 
 return (
@@ -79,7 +77,7 @@ return (
                 <ArrowRight size={15} strokeWidth={1.4} />
             </a>
 
-            <Link className="offers-hero__simple-link" href="/products">
+            <Link className="offers-hero__simple-link" href="/products/clothing">
                 View Collection
             </Link>
             </div>
@@ -175,7 +173,6 @@ return (
             const discountPercent = Number(product.Discount) || 0;
             const discounted = getPriceAfterDiscount(originalPrice, discountPercent);
             const discountAmount = Math.round(((originalPrice - discounted) / originalPrice) * 100);
-            const inWishlist = wishlistContext.isInWishlist ? wishlistContext.isInWishlist(product.id) : false;
             return (
             <article key={product.id} className="offers-product-card">
                 <div className="offers-product-card__image-wrap">
@@ -211,7 +208,7 @@ return (
                     <span className="offers-product-card__price-sale">${discounted}</span>
                 </div>
 
-                <button type="button" className="offers-product-card__add" onClick={() => addToCart(product)}>
+                <button type="button" className="offers-product-card__add" onClick={() => handleAddToCart(product)}>
                     <ShoppingBag size={14} strokeWidth={1.4} />
                     <span>Add to Cart</span>
                 </button>
